@@ -45,19 +45,32 @@ public class BigchainDBJavaDriver {
 
         setConfig();
         KeyPair keys = BigchainDBJavaDriver.getKeys();
+        // KeyPair transferKeys = BigchainDBJavaDriver.getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
         // Run async ConsumerDriver
-        new ConsumerDriver(keys).run();
+        //new ConsumerDriver(keys).run();
 
         // Execute your transactions
-        Transaction rfq = Simulation.createRFQ(driver, keys, null);
-        Transaction bid1 = Simulation.createBid(driver, keys, rfq.getId());
-        Simulation.createBid(driver, keys, rfq.getId());
-
+        Transaction rfq1 = null;
+        Transaction bid1 = null;
+        for(int j = 0; j < 100; j++) {
+            Transaction rfq = Simulation.createRFQ(driver, keys, null);
+            rfq1 = rfq;
+            for(int i = 0; i < 100 ; i++){
+                Transaction bid = Simulation.createBid(driver, keys, rfq.getId(), null);
+                bid1 = bid;
+            }
         MetaData metaData = new MetaData();
         metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-        Transactions.doAccept(driver, bid1.getId(), rfq.getId(), metaData, keys);
+        Transactions.doAccept(driver, bid1.getId(), rfq1.getId(), metaData, keys);
+        }
+
+        //Simulation.createBid(driver, keys, rfq.getId());
+
+        // MetaData metaData = new MetaData();
+        // metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+        // Transactions.doAccept(driver, bid1.getId(), rfq1.getId(), metaData, keys);
     }
 
     /**
@@ -65,7 +78,7 @@ public class BigchainDBJavaDriver {
      */
     public static void setConfig() {
         // Single-Node Setup
-        BigchainDbConfigBuilder.baseUrl("http://152.46.17.20:9984/").setup();
+        BigchainDbConfigBuilder.baseUrl("http://152.7.178.14:9984/").setup();
 
         // Multi-Node Setup
         List<Connection> connections = new ArrayList<>();
@@ -75,10 +88,10 @@ public class BigchainDBJavaDriver {
             connections.add(new Connection(attributes));
         }
 
-//        BigchainDbConfigBuilder
-//                .addConnections(connections)
-//                .setTimeout(60000)
-//                .setup();
+        // BigchainDbConfigBuilder
+        //        .addConnections(connections)
+        //        .setTimeout(60000)
+        //        .setup();
     }
 
     /**

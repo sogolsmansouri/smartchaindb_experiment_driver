@@ -149,7 +149,8 @@ public interface Capabilities {
         cap.add(Capabilities.PRESSING);
         cap.add(Capabilities.SHRINKING);
         cap.add(Capabilities.FOLDING);
-        cap.add(Capabilities.TWISTING);
+        /*
+                cap.add(Capabilities.TWISTING);
         cap.add(Capabilities.BENDING);
         cap.add(Capabilities.HAMMERING);
         cap.add(Capabilities.MATING);
@@ -172,6 +173,9 @@ public interface Capabilities {
         cap.add(Capabilities.GROOVING);
         cap.add(Capabilities.MOULDING);
         cap.add(Capabilities.CASTING);
+         */
+
+
 
         return cap;
     }

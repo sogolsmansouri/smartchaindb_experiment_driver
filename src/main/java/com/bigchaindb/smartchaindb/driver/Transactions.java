@@ -154,7 +154,7 @@ public class Transactions {
         }};
 
         List<String> capabilityList = (List<String>) metaData.getMetadata().get("capability");
-        metaData.setMetaData("inferredCapabilities", Simulation.mediate(capabilityList));
+        //metaData.setMetaData("inferredCapabilities", Simulation.mediate(capabilityList));
 
         try {
             BigchainDbTransactionBuilder.IBuild builder;

@@ -70,12 +70,14 @@ public class StardogTest {
             try (Connection connect = DBConnectionPool.getConnection(DriverConstants.COMMON_DB)) {
 
                 materialList = new ArrayList<>();
-                SelectQuery query = connect.select("SELECT ?y WHERE { ?y rdf:type "
-                        + "<http://resourcedescription.tut.fi/ontology/commonConcepts#MaterialType> }");
+                //SelectQuery query = connect.select("SELECT ?y WHERE { ?y rdf:type "
+                 //       + "<http://resourcedescription.tut.fi/ontology/commonConcepts#MaterialType> }");
+                 SelectQuery query = connect.select("SELECT distinct ?o WHERE { ?y rdf:first "
+                 + " ?o  }");
                 SelectQueryResult result = query.execute();
 
                 while (result.hasNext()) {
-                    Value next = result.next().get("y");
+                    Value next = result.next().get("o");
 
                     if (next.toString().contains("#")) {
                         materialList.add(next.toString().split("#")[1]);
@@ -134,8 +136,10 @@ public class StardogTest {
             valueList.add("Miscellaneous");
         }
 
-        int index = rand.nextInt(valueList.size());
-        return valueList.get(index);
+        //int index = rand.nextInt(valueList.size());
+        //return valueList.get(index);
+        int index = rand.nextInt(valueList.size()) + 1;
+        return valueList.get(index - 1);
     }
 
     /**
@@ -147,7 +151,8 @@ public class StardogTest {
      * @return matchedTopics
      */
     public static List<String> getCapabilityTopic(List<String> capabilities) {
-        List<String> matchedTopics = new ArrayList<>();
+        //List<String> matchedTopics = new ArrayList<>();
+        List<String> matchedTopics = new ArrayList<>(capabilities);
         try {
             ConnectionPool connectPool = DBConnectionPool.getPoolInstance();
 
@@ -159,7 +164,9 @@ public class StardogTest {
                     if (topics.contains(capability)) {
                         matchedTopic = capability;
 
-                    } else {
+                    }
+                    /* 
+                    *else {
                         StringBuilder query = new StringBuilder();
                         query.append("SELECT ?superclass (count(?mid) as ?rank) \nWHERE { \n");
                         query.append(PREFIX + capability + ">").append(" rdfs:subClassOf* ?mid .\n");
@@ -181,6 +188,7 @@ public class StardogTest {
                         }
                     }
                     reasonerCache.put(capability, matchedTopic);
+                    */ 
                 }
 
                 matchedTopics.add(reasonerCache.get(capability));

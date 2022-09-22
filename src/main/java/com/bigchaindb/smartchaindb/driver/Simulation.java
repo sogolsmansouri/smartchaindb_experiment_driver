@@ -18,8 +18,8 @@ import java.util.*;
 
 public class Simulation {
 
-    private static final Producer<String, String> producer = ProducerDriver.createProducer("requestor-"
-            + LocalDateTime.now().toString());
+//    private static final Producer<String, String> producer = ProducerDriver.createProducer("requestor-"
+//            + LocalDateTime.now().toString());
 
     public static void createPreRequest(BigchainDBJavaDriver driver, KeyPair keys, FileWriter prereqFile) {
         final int MAX_REQUEST_COUNT = 2000, MAX_PRODUCT_COUNT_PER_RFQ = 2;
@@ -188,7 +188,7 @@ public class Simulation {
         }
     }
 
-    public static Transaction createBid(BigchainDBJavaDriver driver, KeyPair keys, String rfqId) {
+    public static Transaction createBid(BigchainDBJavaDriver driver, KeyPair keys, String rfqId, KeyPair transferKeys) {
         HashSet<String> hset = Capabilities.getAllRequestTopics();
         String[] array = new String[hset.size()];
         hset.toArray(array);
@@ -205,9 +205,14 @@ public class Simulation {
             String createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
             Thread.sleep(5000);
 
-            MetaData metaData = new MetaData();
-            metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-            bid = Transactions.doBid(driver, createId, rfqId, metaData, keys);
+            //MetaData metaData1 = new MetaData();
+            //metaData1.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            //Transactions.doTransfer(driver, createId, metaData1, keys, transferKeys);
+            //Thread.sleep(2000);
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            bid = Transactions.doBid(driver, createId, rfqId, metaData2, keys);
             Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
@@ -315,7 +320,7 @@ public class Simulation {
 
         String data = js.toString();
         String topic = inferredCapabilities.get(new Random(System.nanoTime()).nextInt(inferredCapabilities.size()));
-        ProducerDriver.produce(producer, topic, txId, data);
+//        ProducerDriver.produce(producer, topic, txId, data);
     }
 
     public static List<String> mediate(List<String> capabilityList) {
