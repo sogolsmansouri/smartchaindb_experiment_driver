@@ -1,0 +1,3005 @@
+<rdf:RDF xmlns="http://www.manunetwork.com/manuservice/v1#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:terms="http://www.manunetwork.com/dc/terms/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:elements="http://www.manunetwork.com/dc/elements/1.0/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:v1="http://www.manunetwork.com/manuservice/v1#" xml:base="http://www.manunetwork.com/manuservice/v1">
+<owl:Ontology rdf:about="http://www.manunetwork.com/manuservice/v1#"/>
+ <!--
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     
+-->
+ <!--
+ http://www.manunetwork.com/dc/elements/1.0/contributor 
+-->
+<owl:AnnotationProperty rdf:about="http://www.manunetwork.com/dc/elements/1.0/contributor"/>
+ <!--  http://www.manunetwork.com/dc/elements/1.0/creator  -->
+<owl:AnnotationProperty rdf:about="http://www.manunetwork.com/dc/elements/1.0/creator"/>
+ <!--  http://www.manunetwork.com/dc/elements/1.0/rights  -->
+<owl:AnnotationProperty rdf:about="http://www.manunetwork.com/dc/elements/1.0/rights"/>
+ <!--  http://www.manunetwork.com/dc/terms/license  -->
+<owl:AnnotationProperty rdf:about="http://www.manunetwork.com/dc/terms/license"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#productAppliedIn 
+-->
+<owl:AnnotationProperty rdf:about="http://www.manunetwork.com/manuservice/v1#productAppliedIn"/>
+ <!--
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     
+-->
+ <!--
+ http://www.manunetwork.com/manuservice/v1#acceptedPaymentMethod 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#acceptedPaymentMethod">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#PaymentMethod"/>
+<rdfs:label xml:lang="en">accepted payment method</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#appliesToDeliveryMethod 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#appliesToDeliveryMethod">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryChargeSpecification"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">applies to delivery method</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#appliesToFeature 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#appliesToFeature">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workingstep"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workplan"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFeature"/>
+<rdfs:label xml:lang="en">applies to feature</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#appliesToPaymentMethod 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#appliesToPaymentMethod">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PaymentChargeSpecification"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#PaymentMethod"/>
+<rdfs:label xml:lang="en">applies to payment method</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#appliesWorkplan 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#appliesWorkplan">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Workplan"/>
+<rdfs:label xml:lang="en">applies workplan</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#expectedDeliveryMethod 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#expectedDeliveryMethod">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label xml:lang="en">expected delivery method</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#fromMaterial 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#fromMaterial">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:label xml:lang="en">from material</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#fromStandardPart 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#fromStandardPart">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#StandardPart"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">from standard part</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasAccessTo 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasAccessTo">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has access to</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasAddress 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasAddress">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:label xml:lang="en">has address</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasBillingAddress 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasBillingAddress">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:label xml:lang="en">has billing address</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasBottomStyle 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasBottomStyle">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#HoleBottomStyle"/>
+<rdfs:label xml:lang="en">has bottom style</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasCornerStyle 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasCornerStyle">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerStyle"/>
+<rdfs:label xml:lang="en">has corner style</rdfs:label>
+</owl:ObjectProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#hasCost  -->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasCost">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:label xml:lang="en">has cost</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasCostExpectation 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasCostExpectation">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:label xml:lang="en">has cost expectation</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasDrawing 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasDrawing">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Drawing"/>
+<rdfs:label xml:lang="en">has drawing</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasFunction 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasFunction">
+<rdfs:label xml:lang="en">has function</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasGeoLocation 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasGeoLocation">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#GeoCoordinates"/>
+<rdfs:label xml:lang="en">has geo location</rdfs:label>
+</owl:ObjectProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#hasOwner  -->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasOwner">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#MazakQTN100IIMS"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:label xml:lang="en">has owner</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasPosition 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasPosition">
+<rdfs:label xml:lang="en">has position</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasPostalAddress 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasPostalAddress">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:label xml:lang="en">has postal address</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasProduct 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasProduct">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:label xml:lang="en">has product</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasProductionModel 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasProductionModel">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#ProductionModel"/>
+<rdfs:label xml:lang="en">has production model</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasServiceLog 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasServiceLog">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#ServiceLog"/>
+<rdfs:label xml:lang="en">has service log</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasServiceProvider 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasServiceProvider">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workingstep"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:label xml:lang="en">has service provider</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasSpindle 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasSpindle">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#MazakQTN100IIMS"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Spindle"/>
+<rdfs:label xml:lang="en">has spindle</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasSubWorkpiece 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasSubWorkpiece">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:label xml:lang="en">has sub workpiece</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasSupplier 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasSupplier">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StandardPart"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has supplier</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasTurret 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasTurret">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#MazakQTN100IIMS"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Spindle"/>
+<rdfs:label xml:lang="en">has turret</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasWorkpiece 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasWorkpiece">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:label xml:lang="en">has workpiece</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#includesFeature 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#includesFeature">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFeature"/>
+<rdfs:label xml:lang="en">includes feature</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#includesWorkingstep 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#includesWorkingstep">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workplan"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#Workingstep"/>
+<rdfs:label xml:lang="en">includes workingstep</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#selectedDeliveryMethod 
+-->
+<owl:ObjectProperty rdf:about="http://www.manunetwork.com/manuservice/v1#selectedDeliveryMethod">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label xml:lang="en">selected delivery method</rdfs:label>
+</owl:ObjectProperty>
+ <!--
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     
+-->
+ <!--
+ http://www.manunetwork.com/manuservice/v1#addressCountry 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#addressCountry">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">address country</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#addressLocality 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#addressLocality">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">address locality</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#addressRegion 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#addressRegion">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">address region</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightChamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">angle of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfCountersunkFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfCountersunkFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">angle of countersunk face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfFallingFlank 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfFallingFlank">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">angle of falling flank</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfRisingFlank 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfRisingFlank">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">angle of rising flank</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfSymetricVGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfSymetricVGroove">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angle of symetric V groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfTip 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfTip">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConicalBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">angle of tip</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#angleOfWallValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#angleOfWallValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">angle of wall value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#bottomRadius 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#bottomRadius">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">bottom radius</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#category  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#category">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">category</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#chunkSize 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#chunkSize">
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+<rdfs:label xml:lang="en">chunk size</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#cornerBreak 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#cornerBreak">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerBreak"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">corner break</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#creditGrade 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#creditGrade">
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+<rdfs:label xml:lang="en">credit grade</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#dateLastModified 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#dateLastModified">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+<rdfs:label xml:lang="en">date last modified</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#dateOriginated 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#dateOriginated">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+<rdfs:comment xml:lang="en">
+This property specifies the end of the availability of the gr:ProductOrService included in the gr:Offering. The difference to the properties gr:validFrom and gr:validThrough is that those specify the period of time during which the offer is valid and can be accepted. Example: I offer to lease my boat for the period of August 1 - August 31, 2010, but you must accept by offer no later than July 15. A time-zone should be specified. For a time in GMT/UTC, simply add a "Z" following the time: 2008-05-30T09:30:10Z. Alternatively, you can specify an offset from the UTC time by adding a positive or negative time following the time: 2008-05-30T09:30:10-09:00 or 2008-05-30T09:30:10+09:00. Note: There is another property gr:availableAtOrFrom, which is used to indicate the gr:Location (e.g. store or shop) from which the goods would be available.
+</rdfs:comment>
+<rdfs:label xml:lang="en">date originated</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#depthOfFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#depthOfFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConvexContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">depth of face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#depthOfGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#depthOfGroove">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">depth of groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#depthOfPocket 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#depthOfPocket">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">depth of pocket</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#depthOfShoulder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#depthOfShoulder">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">depth of shoulder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#depthOfSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#depthOfSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">depth of slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#description 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#description">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workingstep"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">description</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfCountersunkHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfCountersunkHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of countersunk hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfCylinder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfCylinder">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of cylinder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfFlatbottomedHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfFlatbottomedHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of flatbottomed hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfGrooveFloorCylinder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfGrooveFloorCylinder">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">diameter of groove floor cylinder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfInnerCylinder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfInnerCylinder">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of inner cylinder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfInnerHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfInnerHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffTube"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of inner hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfPlanarFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfPlanarFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of planar face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfPlanarSplitFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfPlanarSplitFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffTube"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of planar split face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#diameterOfPredrilledHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#diameterOfPredrilledHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">diameter of predrilled hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#distanceBetweenGrooveAndFrontFaceOfWorkpiece 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#distanceBetweenGrooveAndFrontFaceOfWorkpiece">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">
+distance between groove and front face of workpiece
+</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#drawingNumber 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#drawingNumber">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">drawing number</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#elevation 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#elevation">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeoCoordinates"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#eligibleRegions 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#eligibleRegions">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryChargeSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">eligible regions</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#entityType 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#entityType">
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">entity type</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#eventDate 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#eventDate">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ServiceLog"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">event date</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#eventDescription 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#eventDescription">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ServiceLog"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">event description</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#eventType 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#eventType">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ServiceLog"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">event type</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#faxNumber 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#faxNumber">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">fax number</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#fileFormat 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#fileFormat">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Drawing"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">file format</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#fileSize  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#fileSize">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Drawing"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">file size</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#floorRadiusValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#floorRadiusValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerRadius"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">floor radius value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#grooveWidth 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#grooveWidth">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">groove width</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasCurrency 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasCurrency">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">has currency</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasCurrencyValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasCurrencyValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has currency value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#hasDUNS  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasDUNS">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">has DUNS</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasGlobalLocationNumber 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasGlobalLocationNumber">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">has Global Location Number</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasHardnessHB 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasHardnessHB">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has hardness HB</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasHardnessHRC 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasHardnessHRC">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has hardness HRC</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasISICv4 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasISICv4">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+<rdfs:label xml:lang="en">has ISIC v4</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMaXCurrencyValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMaXCurrencyValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has max currency value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMaxHardnessHB 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMaxHardnessHB">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has max hardness HB</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMaxHardnessHRC 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMaxHardnessHRC">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has max hardness HRC</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMaxValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMaxValue">
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">has max value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMinCurrencyValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMinCurrencyValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has min currency value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMinHardnessHB 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMinHardnessHB">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has min hardness HB</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMinHardnessHRC 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMinHardnessHRC">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+<rdfs:label xml:lang="en">has min hardness HRC</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasMinValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasMinValue">
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">has min value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#hasNAICS  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasNAICS">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+<rdfs:label xml:lang="en">has NAICS</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#hasUnitOfMeasurement 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#hasUnitOfMeasurement">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">has unit of measurement</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#id  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#id">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Resource"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">id</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#innerDiameterOfCylinder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#innerDiameterOfCylinder">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">inner diameter of cylinder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#innerDiameterOfProfile 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#innerDiameterOfProfile">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">inner diameter of profile</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#jobNumber 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#jobNumber">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">job number</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#latitude  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#latitude">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeoCoordinates"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#legalName 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#legalName">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">legal name</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightChamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfContouredSurface 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfContouredSurface">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConvexContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of contoured surface</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfCylinder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfCylinder">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of cylinder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfCylindricalPartOfGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfCylindricalPartOfGroove">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">length of cylindrical part of groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfFlatbottomedHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfFlatbottomedHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of flatbottomed hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfPlanarSurface 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfPlanarSurface">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of planar surface</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfProfile 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfProfile">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of profile</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#lengthOfShoulder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#lengthOfShoulder">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">length of shoulder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#longitude 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#longitude">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeoCoordinates"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#materialGroup 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#materialGroup">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">material group</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#materialSubGroup 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#materialSubGroup">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">material sub group</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAllowedLengthOfHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAllowedLengthOfHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max allowed length of hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAngleOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAngleOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightChamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max angle of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAngleOfCountersunkFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAngleOfCountersunkFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max angle of countersunk face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAngleOfEntryAtHoleStart 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAngleOfEntryAtHoleStart">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max angle of entry at hole start</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAngleOfExitAtHoleEnd 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAngleOfExitAtHoleEnd">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max angle of exit at hole end</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAngleOfTip 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAngleOfTip">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConicalBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max angle of tip</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxAngleOfWallValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxAngleOfWallValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max angle of wall value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxBarWorkCapacity 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxBarWorkCapacity">
+<rdfs:label xml:lang="en">max bar work capacity</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#maxDepth  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDepth">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max depth</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxDepthOfCut 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDepthOfCut">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max depth of cut</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxDepthOfSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDepthOfSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max depth of slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxDiameterOfAxialGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDiameterOfAxialGroove">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">max diameter of axial groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxDiameterOfCountersunkHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDiameterOfCountersunkHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max diameter of countersunk hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxDiameterOfFlatbottomedHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDiameterOfFlatbottomedHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max diameter of flatbottomed hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxDiameterOfHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxDiameterOfHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max diameter of hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxFloorRadiusValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxFloorRadiusValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerRadius"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max floor radius value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxGrooveWidth 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxGrooveWidth">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">max groove width</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxLengthOfCylindricalPartOfGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxLengthOfCylindricalPartOfGroove">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">max length of cylindrical part of groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxMachiningDiameter 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxMachiningDiameter">
+<rdfs:label xml:lang="en">max machining diameter</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxMachiningLength 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxMachiningLength">
+<rdfs:label xml:lang="en">max machining length</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxRadiusOfConcaveGroundShape 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxRadiusOfConcaveGroundShape">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max radius of concave ground shape</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#maxSpeed  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxSpeed">
+<rdfs:label xml:lang="en">max speed</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#maxSwing  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxSwing">
+<rdfs:label xml:lang="en">max swing</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#45Chamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max width of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfCut 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfCut">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">max width of cut</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfRemovedMaterialZone 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfRemovedMaterialZone">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffTube"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max width of removed material zone</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfShoulder 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfShoulder">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max width of shoulder</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max width of slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfTSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfTSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max width of T slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWidthOfTSlotNeck 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWidthOfTSlotNeck">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">max width of T slot neck</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#maxWorkpieceWeight 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#maxWorkpieceWeight">
+<rdfs:label xml:lang="en">max workpiece weight</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minAngleOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minAngleOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightChamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min angle of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minAngleOfCountersunkFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minAngleOfCountersunkFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min angle of countersunk face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minAngleOfTip 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minAngleOfTip">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConicalBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min angle of tip</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minAngleOfWallVaule 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minAngleOfWallVaule">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min angle of wall value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minDepthOfSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minDepthOfSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min depth of slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minDiameterOfAxialGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minDiameterOfAxialGroove">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">min diameter of axial groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minDiameterOfCountersunkHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minDiameterOfCountersunkHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min diameter of countersunk hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minDiameterOfFlatbottomedHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minDiameterOfFlatbottomedHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min diameter of flatbottomed hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minDiameterOfHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minDiameterOfHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min diameter of hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minFloorRadiusOfFaceGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minFloorRadiusOfFaceGroove">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">min floor radius of face groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minFloorRadiusValue 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minFloorRadiusValue">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerRadius"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min floor radius value</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minGrooveWidth 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minGrooveWidth">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">min groove width</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minLengthOfCylindricalPartOfGroove 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minLengthOfCylindricalPartOfGroove">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">min length of cylindrical part of groove</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minLengthOfCylindricalSurface 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minLengthOfCylindricalSurface">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min length of cylindrical surface</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minLengthOfSurfaceQuality 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minLengthOfSurfaceQuality">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min length of surface quality</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minRadiusInConcaveCorner 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minRadiusInConcaveCorner">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min radius in concave corner</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minRadiusOfConcaveGroundShape 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minRadiusOfConcaveGroundShape">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min radius of concave ground shape</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minWidthOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minWidthOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#45Chamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min width of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minWidthOfSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minWidthOfSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min width of slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minWidthOfTSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minWidthOfTSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min width of T slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#minWidthOfTSlotNeck 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#minWidthOfTSlotNeck">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">min width of T slot neck</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#motorOutput 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#motorOutput">
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+<rdfs:label xml:lang="en">motor output</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#name  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#name">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConvexContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFeature"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCutOffTube"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workingstep"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workplan"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">name</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#nominalDiameter 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#nominalDiameter">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">nominal diameter</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#numOfTools 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#numOfTools">
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+<rdfs:label xml:lang="en">num of tools</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#overallLengthOfHole 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#overallLengthOfHole">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">overall length of hole</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#partCode  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#partCode">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StandardPart"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">part code</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#partNumber 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#partNumber">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">part number</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#pitch  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#pitch">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">pitch</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#postalCode 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#postalCode">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">postal code</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#postalOfficeBoxNumber 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#postalOfficeBoxNumber">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">postal office box number</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#qualityOfFace 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#qualityOfFace">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">quality of face</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#qualityOfWallSurface 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#qualityOfWallSurface">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ContouredShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConvexContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">quality of wall surface</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#quantity  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#quantity">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Product"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workpiece"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#radiusOfConcaveGroundShape 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#radiusOfConcaveGroundShape">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">radius of concave ground shape</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#radiusOfCorner 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#radiusOfCorner">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">radius of corner</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#radiusOfSmallestConcaveBlend 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#radiusOfSmallestConcaveBlend">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">raidus of smallest concave blend</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#radiusOfSmallestConcaveProfileBlend 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#radiusOfSmallestConcaveProfileBlend">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">raidus of smallest concave profile blend</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#smallestWidthOfGap 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#smallestWidthOfGap">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">smallest width of gap</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#standardName 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#standardName">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StandardPart"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">standard name</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#status  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#status">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Workingstep"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#stockInAxialDirection 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#stockInAxialDirection">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">stock in axial direction</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#stockInRadialDirection 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#stockInRadialDirection">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">stock in radial direction</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#stockOnSurface 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#stockOnSurface">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ConvexContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">stock on surface</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#streetAddress 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#streetAddress">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Address"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">street address</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#telephone 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#telephone">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#BusinessEntity"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#threadOrientation 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#threadOrientation">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">thread orientation</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#threadPercent 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#threadPercent">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">thread percent</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#threadSize 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#threadSize">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">thread size</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#timeOfDelivery 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#timeOfDelivery">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+<rdfs:label xml:lang="en">time of delivery</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#travelXAxis 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#travelXAxis">
+<rdfs:label xml:lang="en">travel X axis</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#travelZAxis 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#travelZAxis">
+<rdfs:label xml:lang="en">travel Z axis</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#typeOfThread 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#typeOfThread">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">type of thread</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#url  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#url">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Drawing"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">url</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#usableLength 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#usableLength">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">usable length</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#userTriggedIt 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#userTriggedIt">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ServiceLog"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">user trigged it</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#validFrom 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#validFrom">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+<rdfs:label xml:lang="en">valid from</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#validThrough 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#validThrough">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+<rdfs:label xml:lang="en">valid through</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#valueAddedTaxIncluded 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#valueAddedTaxIncluded">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+<rdfs:label xml:lang="en">value added tax included</rdfs:label>
+</owl:DatatypeProperty>
+ <!--  http://www.manunetwork.com/manuservice/v1#version  -->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#version">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#Project"/>
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+<rdfs:label xml:lang="en">version</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#volumeOfMaterial 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#volumeOfMaterial">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#IDTaperProfile"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODFaceGroove"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#ODGroove"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">volume of material</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#volumeOfPocket 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#volumeOfPocket">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CylindricalPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">volume of pocket</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#widthOfChamfer 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#widthOfChamfer">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightChamfer"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#45Chamfer"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">width of chamfer</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#widthOfOpenArea 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#widthOfOpenArea">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">width of open area</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#widthOfPlanarSurface 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#widthOfPlanarSurface">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#PlanarSurface"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">width of planar surface</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#widthOfSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#widthOfSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#CurveSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#StraightSlot"/>
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">width of slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#widthOfTSlot 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#widthOfTSlot">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">width of T slot</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#widthOfTSlotNeck 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#widthOfTSlotNeck">
+<rdfs:domain rdf:resource="http://www.manunetwork.com/manuservice/v1#TSlot"/>
+<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+<rdfs:label xml:lang="en">width of T slot neck</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#workpieceDiameter 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#workpieceDiameter">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">workpiece diameter</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#workpieceLength 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#workpieceLength">
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">workpiece length</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#yearsInOperation 
+-->
+<owl:DatatypeProperty rdf:about="http://www.manunetwork.com/manuservice/v1#yearsInOperation">
+<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+<rdfs:label xml:lang="en">years in operation</rdfs:label>
+</owl:DatatypeProperty>
+ <!--
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     
+-->
+ <!--  http://www.manunetwork.com/manuservice/v1#Address  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Address"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#BusinessEntity 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#BusinessEntity">
+<rdfs:label xml:lang="en">Business entity</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Capability 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Capability"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ComputationalResource 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ComputationalResource">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#HardResource"/>
+<rdfs:label xml:lang="en">Computional resource</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ConicalBottom 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ConicalBottom">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#HoleBottomStyle"/>
+<rdfs:label xml:lang="en">Conical bottom</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ContouredShoulder 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ContouredShoulder">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Contoured shoulder</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ConvexContourSurface 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ConvexContourSurface">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Convex contour surface</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CornerBreak 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CornerBreak">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerStyle"/>
+<rdfs:label xml:lang="en">Corner break</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CornerRadius 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CornerRadius">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerStyle"/>
+<rdfs:label xml:lang="en">Corner radius</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CornerStyle 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CornerStyle">
+<rdfs:label xml:lang="en">Corner style</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CostSpecification 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CostSpecification">
+<rdfs:label xml:lang="en">Price specification</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CounterboreBlindHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Counterbore blind hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CounterboreThroughHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Counterbore through hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CountersunkBlindHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Countersunk blind hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CountersunkThroughHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Countersunk through hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CurveSlot 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CurveSlot">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Curve slot</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CuttingTool 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CuttingTool">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningResource"/>
+<rdfs:label xml:lang="en">Cutting tool</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CylindricalPocket 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#CylindricalPocket">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cylindrical pocket</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryChargeSpecification 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryChargeSpecification">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:label xml:lang="en">Delivery charge specification</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryMethod 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryMethod">
+<rdfs:label xml:lang="en">Delivery method</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryModeParcelService 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryModeParcelService">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label xml:lang="en">Delivery mode parcel service</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DesignCapability 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#DesignCapability">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#Capability"/>
+<rdfs:label xml:lang="en">Design capability</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Drawing  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Drawing">
+<rdfs:label xml:lang="en">Drawing</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DrillingFeature 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#DrillingFeature">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFeature"/>
+<rdfs:label xml:lang="en">Drilling feature</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ExperimentCapability 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ExperimentCapability">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#Capability"/>
+<rdfs:label xml:lang="en">Experiment capability</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#FiveAxis  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#FiveAxis">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Five axis</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FlatBottom 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#FlatBottom">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#HoleBottomStyle"/>
+<rdfs:label xml:lang="en">Flat bottom</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#FourAxis  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#FourAxis">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Four axis</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#GeneralClosedPocket">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">General closed pocket</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GeneralContourSurface 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#GeneralContourSurface">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">General contour surface</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#GeneralOpenPocket">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">General open pocket</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GeoCoordinates 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#GeoCoordinates">
+<rdfs:label xml:lang="en">Geo coordinates</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#HardResource 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#HardResource">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#Resource"/>
+<rdfs:label xml:lang="en">Hard resource</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#HoleBottomStyle 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#HoleBottomStyle">
+<rdfs:label xml:lang="en">Hole bottom style</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#HorizontalMachine 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#HorizontalMachine">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Horizontal machine</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottom">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">ID blind hole with flat bottom</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithFlatBottomFromPredrilledHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+ID blind hole with flat bottom from predrilled hole
+</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDBlindHoleWithUndefinedShape">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">ID blind hole with undefined shape</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#IDGroove  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDGroove">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ID groove</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDSimpleBlindHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">ID simple blind hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDSimpleThroughHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">ID simple through hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#IDTaperProfile 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#IDTaperProfile">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">ID taper profile</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Industry  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Industry"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Knowledge 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Knowledge">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#SoftResource"/>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MachineType 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MachineType">
+<rdfs:label xml:lang="en">Machine type</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MachiningCentre 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MachiningCentre">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Machining centre</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MachiningFeature 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MachiningFeature">
+<rdfs:label xml:lang="en">Machining feature</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MachiningFunction 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MachiningFunction">
+<rdfs:label xml:lang="en">Machining function</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MachiningResource 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MachiningResource">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#HardResource"/>
+<rdfs:label xml:lang="en">Machining resource</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MachiningStage 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MachiningStage">
+<rdfs:label xml:lang="en">Machining stage</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ManagementCapability 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ManagementCapability">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#Capability"/>
+<rdfs:label xml:lang="en">Management capability</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Material  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Material">
+<rdfs:label xml:lang="en">Material</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MaterialGroup 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MaterialGroup">
+<rdfs:label xml:lang="en">Material group</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MazakQTN100IIMS 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MazakQTN100IIMS">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningResource"/>
+<rdfs:label xml:lang="en">Mazak QTN 100II MS</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MillingFeature 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MillingFeature">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFeature"/>
+<rdfs:label xml:lang="en">Milling feature</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MillingMachine 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MillingMachine">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Milling machine</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#MultitaskingMachine 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#MultitaskingMachine">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Multitasking machine</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODCutOffSolid 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODCutOffSolid">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD cut off solid</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODCutOffTube 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODCutOffTube">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OD cut off tube</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODCylindricalSurfaceWithShoulder">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD cylindrical surface with shoulder</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODFaceGroove 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODFaceGroove">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OD face groove</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODGeneralProfile 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODGeneralProfile">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD general profile</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#ODGroove  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODGroove">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OD groove</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODIncreasingProfile">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD increasing profile</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromSolid">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD planar surface from solid</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODPlanarSurfaceFromTube">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD planar surface from tube</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODSimpleCylinder">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD simple cylinder</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ODSimpleCylindricalSurface">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#TurningFeature"/>
+<rdfs:label xml:lang="en">OD simple cylindrical surface</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PaymentChargeSpecification 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#PaymentChargeSpecification">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#CostSpecification"/>
+<rdfs:label xml:lang="en">Payment charge specification</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PaymentMethod 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#PaymentMethod">
+<rdfs:label xml:lang="en">Payment method</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Personnel 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Personnel">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#SoftResource"/>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#PlanarContourChamfer">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Planar contour chamfer</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PlanarSurface 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#PlanarSurface">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Planar surface</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Product  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Product">
+<rdfs:label xml:lang="en">Product</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ProductionCapability 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ProductionCapability">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#Capability"/>
+<rdfs:label xml:lang="en">Production capability</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ProductionModel 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ProductionModel">
+<rdfs:label xml:lang="en">Production model</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Project  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Project">
+<rdfs:label xml:lang="en">Project</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#RawMaterial 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#RawMaterial">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#HardResource"/>
+<rdfs:label xml:lang="en">Raw material</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Resource  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Resource"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ServiceLog 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ServiceLog">
+<rdfs:label xml:lang="en">Service log</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SimpleBlindHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#SimpleBlindHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Simple blind hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SimpleThroughHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#SimpleThroughHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Simple through hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#SlotWithConcaveRunOn">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Slot with concave run on</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SoftResource 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#SoftResource">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#Resource"/>
+<rdfs:label xml:lang="en">Soft resource</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Software  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Software">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#SoftResource"/>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Spindle  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Spindle"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SquareEnd 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#SquareEnd">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerStyle"/>
+<rdfs:label xml:lang="en">Square end</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#StandardPart 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#StandardPart">
+<rdfs:label xml:lang="en">Standard part</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#StraightChamfer 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#StraightChamfer">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Straight chamfer</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#StraightShoulder 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#StraightShoulder">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Straight shoulder</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#StraightSlot 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#StraightSlot">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">Straight slot</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#TSlot  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#TSlot">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MillingFeature"/>
+<rdfs:label xml:lang="en">T slot</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ThreadedBlindHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Threaded blind hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ThreadedThroughHole">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#DrillingFeature"/>
+<rdfs:label xml:lang="en">Threaded through hole</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ThreeAxis 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#ThreeAxis">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Three axis</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#TurningFeature 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#TurningFeature">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFeature"/>
+<rdfs:label xml:lang="en">Turning feature</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#TurningMachine 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#TurningMachine">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Turning machine</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Turret  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Turret"/>
+ <!--  http://www.manunetwork.com/manuservice/v1#TwoAxis  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#TwoAxis">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Two axis</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#VerticalMachine 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#VerticalMachine">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#MachineType"/>
+<rdfs:label xml:lang="en">Vertical machine</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Workingstep 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Workingstep">
+<rdfs:label xml:lang="en">Workingstep</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Workpiece 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Workpiece">
+<rdfs:label xml:lang="en">Workpiece</rdfs:label>
+</owl:Class>
+ <!--  http://www.manunetwork.com/manuservice/v1#Workplan  -->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#Workplan">
+<rdfs:label xml:lang="en">Workplan</rdfs:label>
+</owl:Class>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#45Chamfer 
+-->
+<owl:Class rdf:about="http://www.manunetwork.com/manuservice/v1#45Chamfer">
+<rdfs:subClassOf rdf:resource="http://www.manunetwork.com/manuservice/v1#CornerStyle"/>
+<rdfs:label xml:lang="en">45 chamfer</rdfs:label>
+</owl:Class>
+ <!--
+ 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     
+-->
+ <!--  http://www.manunetwork.com/manuservice/v1#A-Carbon  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#A-Carbon">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Aerospace 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Aerospace">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Broaching 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Broaching">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Chamfering 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Chamfering">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Chemistry 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Chemistry">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#CirclipGrooving 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#CirclipGrooving">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#DHL  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#DHL">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryModeParcelService"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryModeDirectDownload 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryModeDirectDownload">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delivery mode direct download</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryModeFreight 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryModeFreight">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delivery model freight</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryModeMail 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryModeMail">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delivery mode mail</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryModeOwnFleet 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryModeOwnFleet">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delivery mode own fleet</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#DeliveryModePickUp 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#DeliveryModePickUp">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryMethod"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Delivery mode pick up</rdfs:label>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Drilling  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Drilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#EndMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#EndMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Energy  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Energy">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#EngineerToOrder 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#EngineerToOrder">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#ProductionModel"/>
+<rdfs:label xml:lang="en">Engineer to order</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Engineer_to_order 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Engineer_to_order"/>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ExternalGrooving 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ExternalGrooving">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ExternalThreadTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ExternalThreadTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ExternalTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ExternalTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FaceGrooving 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#FaceGrooving">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FaceMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#FaceMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FaceTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#FaceTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FederalExpress 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#FederalExpress">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryModeParcelService"/>
+<rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Federal express</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Finishing 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Finishing">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningStage"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FoodProcessing 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#FoodProcessing">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+<rdfs:label xml:lang="en">Food processing</rdfs:label>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#FormMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#FormMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GearMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#GearMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GeneralDrilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#GeneralDrilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#GeneralGrooving 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#GeneralGrooving">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Grinding  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Grinding">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Grooving  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Grooving">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Honding  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Honding">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#ISO_H  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ISO_H">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MaterialGroup"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#ISO_K  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ISO_K">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MaterialGroup"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#ISO_M  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ISO_M">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MaterialGroup"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#ISO_N  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ISO_N">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MaterialGroup"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#ISO_P  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ISO_P">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MaterialGroup"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#ISO_S  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ISO_S">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MaterialGroup"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#InternalThreadTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#InternalThreadTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#InternalTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#InternalTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#LongitudinalTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#LongitudinalTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Marine  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Marine">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Milling  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Milling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Mining  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Mining">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#OilGas  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#OilGas">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+<rdfs:label xml:lang="en">Oil gas</rdfs:label>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Paper  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Paper">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PartingOff 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#PartingOff">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PlainMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#PlainMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Planning  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Planning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#PocketMachining 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#PocketMachining">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ProductDesignFile 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ProductDesignFile">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Drawing"/>
+<fileFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dxf</fileFormat>
+<fileSize rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">12.8M</fileSize>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ProfileMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ProfileMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ProfileTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ProfileTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Refinery  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Refinery">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Industry"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Roughing  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Roughing">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningStage"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Sawing  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Sawing">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Semifinishing 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Semifinishing">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningStage"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Shaping  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Shaping">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SiliconCarbide 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#SiliconCarbide">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#Material"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#SlotMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#SlotMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#StepDrilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#StepDrilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Tapping  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Tapping">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ThreadMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ThreadMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#ThreadTurning 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#ThreadTurning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#Threading 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Threading">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--
+ http://www.manunetwork.com/manuservice/v1#TurnMilling 
+-->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#TurnMilling">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#Turning  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#Turning">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#MachiningFunction"/>
+</owl:NamedIndividual>
+ <!--  http://www.manunetwork.com/manuservice/v1#UPS  -->
+<owl:NamedIndividual rdf:about="http://www.manunetwork.com/manuservice/v1#UPS">
+<rdf:type rdf:resource="http://www.manunetwork.com/manuservice/v1#DeliveryModeParcelService"/>
+</owl:NamedIndividual>
+</rdf:RDF>
+<!--
+ Generated by the OWL API (version 5.1.0) https://github.com/owlcs/owlapi/ 
+-->
