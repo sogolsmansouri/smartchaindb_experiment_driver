@@ -78,7 +78,7 @@ public class BigchainDBJavaDriver {
      */
     public static void setConfig() {
         // Single-Node Setup
-        BigchainDbConfigBuilder.baseUrl("http://152.7.178.14:9984/").setup();
+        BigchainDbConfigBuilder.baseUrl("http://152.7.177.221:9984/").setup();
 
         // Multi-Node Setup
         List<Connection> connections = new ArrayList<>();

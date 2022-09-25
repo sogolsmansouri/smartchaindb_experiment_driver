@@ -14,7 +14,7 @@ sudo apt-get update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo adduser $MYUSER docker
 
-#install Stardog
+#install Stardog for only 1 driver if you use more than 1
 sudo docker pull stardog/stardog:latest
 
 #create directory ~/stardog-home and put the license key inside this folder. 
