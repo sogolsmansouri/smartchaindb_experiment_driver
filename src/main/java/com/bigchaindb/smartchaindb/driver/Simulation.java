@@ -260,7 +260,7 @@ public class Simulation {
         List<Map<String, String>> productsList = new ArrayList<>();
         List<String> availableCapabilities = new ArrayList<>(Capabilities.getAllRequestTopics());
 
-        for (int k = 0; k < productCount; k++) {
+/*         for (int k = 0; k < productCount; k++) {
             Map<String, String> productMetadata = new TreeMap<>();
             List<String> randomAttributes = StardogTest.getKeys();
 
@@ -272,7 +272,7 @@ public class Simulation {
             }
 
             productsList.add(productMetadata);
-        }
+        } */
 
         final int NUM_OF_CAPS = random.nextInt(20) + 1;
         for (int _k = 0; _k < NUM_OF_CAPS; _k++) {

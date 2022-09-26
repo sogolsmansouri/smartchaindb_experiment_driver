@@ -15,13 +15,15 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo adduser $MYUSER docker
 
 #install Stardog
-sudo docker pull stardog/stardog:latest
+sudo docker pull stardog/stardog:8.0.1-java11-preview
 
 #create directory ~/stardog-home and put the license key inside this folder. 
 #stardog is needed to get manufacturing ontologies for the experiments
 #then run
 #sudo docker run -it -v ~/stardog-home/:/var/opt/stardog -p 5820:5820 stardog/stardog
 #sudo docker run --name=stardog-studio -p 8888:8080 -d stardog/stardog-studio:current
+#sudo chmod 777 ~/stardog-home
+
 
 
 #Install SDK to install Gradle, run the following commands: 
