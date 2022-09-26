@@ -16,7 +16,7 @@ public class DriverConstants {
     protected static final String COMMON_TOPIC = "SystemQueue";
 
     // Stardog-related constants
-    protected static final String SERVER = "http://152.7.178.14:5820";
+    protected static final String SERVER = "http://152.7.177.221:5820";
     protected static final String ADMIN_USERNAME = "admin";
     protected static final String ADMIN_PASSWORD = "admin";
     protected static final String PROCESS_DB = "MARCO-ProcessTaxonomy";

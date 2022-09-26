@@ -14,8 +14,13 @@ sudo apt-get update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo adduser $MYUSER docker
 
+<<<<<<< HEAD
 #install Stardog
 sudo docker pull stardog/stardog:8.0.1-java11-preview
+=======
+#install Stardog for only 1 driver if you use more than 1
+sudo docker pull stardog/stardog:latest
+>>>>>>> dc82c389a9b50e17d78933a597f4e93e5285b3df
 
 #create directory ~/stardog-home and put the license key inside this folder. 
 #stardog is needed to get manufacturing ontologies for the experiments
