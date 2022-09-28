@@ -188,7 +188,40 @@ public class Simulation {
         }
     }
 
-    public static Transaction createBid(BigchainDBJavaDriver driver, KeyPair keys, String rfqId, KeyPair transferKeys) {
+    public static String createCreate(BigchainDBJavaDriver driver, KeyPair keys) {
+        HashSet<String> hset = Capabilities.getAllRequestTopics();
+        String[] array = new String[hset.size()];
+        hset.toArray(array);
+        String createId = null;
+
+        try {
+            Map<String, Object> cre_assetData = new TreeMap<String, Object>() {{
+                put("capability", array);
+                put("machineIdentifier", "X100" + LocalDateTime.now().toString());
+            }};
+
+            MetaData creMetaData = new MetaData();
+            creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
+            Thread.sleep(5000);
+
+            //MetaData metaData1 = new MetaData();
+            //metaData1.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            //Transactions.doTransfer(driver, createId, metaData1, keys, transferKeys);
+            //Thread.sleep(2000);
+/* 
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            bid = Transactions.doBid(driver, createId, rfqId, metaData2, keys);
+            Thread.sleep(2000); */
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return createId;
+    }
+
+    public static Transaction createBid(BigchainDBJavaDriver driver, KeyPair keys, String rfqId, String createId) {
         HashSet<String> hset = Capabilities.getAllRequestTopics();
         String[] array = new String[hset.size()];
         hset.toArray(array);
@@ -200,10 +233,10 @@ public class Simulation {
                 put("machineIdentifier", "X100" + LocalDateTime.now().toString());
             }};
 
-            MetaData creMetaData = new MetaData();
+/*             MetaData creMetaData = new MetaData();
             creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             String createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
-            Thread.sleep(5000);
+            Thread.sleep(5000); */
 
             //MetaData metaData1 = new MetaData();
             //metaData1.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
@@ -254,10 +287,10 @@ public class Simulation {
     }
 
     static MetaData getRandomMetadata(int MAX_PRODUCT_COUNT_PER_RFQ) {
-        Random random = new Random(System.nanoTime());
-        Set<String> capset = new HashSet<>();
-        int productCount = random.nextInt(MAX_PRODUCT_COUNT_PER_RFQ) + 1;
-        List<Map<String, String>> productsList = new ArrayList<>();
+        // Random random = new Random(System.nanoTime());
+        // Set<String> capset = new HashSet<>();
+        // int productCount = random.nextInt(MAX_PRODUCT_COUNT_PER_RFQ) + 1;
+        // List<Map<String, String>> productsList = new ArrayList<>();
         List<String> availableCapabilities = new ArrayList<>(Capabilities.getAllRequestTopics());
 
 /*         for (int k = 0; k < productCount; k++) {
@@ -274,16 +307,16 @@ public class Simulation {
             productsList.add(productMetadata);
         } */
 
-        final int NUM_OF_CAPS = random.nextInt(20) + 1;
+/*         final int NUM_OF_CAPS = random.nextInt(20) + 1;
         for (int _k = 0; _k < NUM_OF_CAPS; _k++) {
             int index = random.nextInt(availableCapabilities.size());
             capset.add(availableCapabilities.get(index));
             availableCapabilities.remove(index);
-        }
+        } */
 
         MetaData reqMetaData = new MetaData();
-        reqMetaData.setMetaData("products", productsList);
-        reqMetaData.setMetaData("capability", new ArrayList<>(capset));
+        // reqMetaData.setMetaData("products", productsList);
+        reqMetaData.setMetaData("capability", availableCapabilities);
 
         return reqMetaData;
     }

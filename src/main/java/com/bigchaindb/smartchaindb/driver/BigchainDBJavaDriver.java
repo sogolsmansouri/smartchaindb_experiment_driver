@@ -54,16 +54,34 @@ public class BigchainDBJavaDriver {
         // Execute your transactions
         Transaction rfq1 = null;
         Transaction bid1 = null;
-        for(int j = 0; j < 100; j++) {
+        List<String> rfq_ids = new ArrayList<>();
+        List<String> create_ids = new ArrayList<>();
+        Transaction winningBid = null;
+        int rfq_count = 20;
+        int create_count = 1000;
+        int bid_count = 1000;
+        int bids_per_rfq = 50;
+        int counter = 0;
+        //create rfqs 
+        for(int j = 0; j < rfq_count; j++) {
             Transaction rfq = Simulation.createRFQ(driver, keys, null);
-            rfq1 = rfq;
-            for(int i = 0; i < 100 ; i++){
-                Transaction bid = Simulation.createBid(driver, keys, rfq.getId(), null);
-                bid1 = bid;
+            rfq_ids.add(rfq.getId());
+        }
+        // create assests seperately 
+        for(int k = 0; k < create_count; k++) {
+            String createId = Simulation.createCreate(driver, keys);
+            create_ids.add(createId);
+        }
+        for(int i = 0; i  < rfq_ids.size() ; i++){
+            String rfqId = rfq_ids.get(i);
+            for(int j = 0;  j < bids_per_rfq; j++) {
+                String createId = create_ids.get(counter);
+                counter ++;
+                winningBid = Simulation.createBid(driver, keys, rfqId, createId);
             }
-        MetaData metaData = new MetaData();
-        metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-        Transactions.doAccept(driver, bid1.getId(), rfq1.getId(), metaData, keys);
+            MetaData metaData = new MetaData();
+            metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            Transactions.doAccept(driver, winningBid.getId(), rfqId, metaData, keys);
         }
 
         //Simulation.createBid(driver, keys, rfq.getId());
@@ -78,7 +96,7 @@ public class BigchainDBJavaDriver {
      */
     public static void setConfig() {
         // Single-Node Setup
-        BigchainDbConfigBuilder.baseUrl("http://152.7.177.221:9984/").setup();
+        //BigchainDbConfigBuilder.baseUrl("http://152.7.176.32:9984/").setup();
 
         // Multi-Node Setup
         List<Connection> connections = new ArrayList<>();
@@ -88,10 +106,10 @@ public class BigchainDBJavaDriver {
             connections.add(new Connection(attributes));
         }
 
-        // BigchainDbConfigBuilder
-        //        .addConnections(connections)
-        //        .setTimeout(60000)
-        //        .setup();
+         BigchainDbConfigBuilder
+                .addConnections(connections)
+                .setTimeout(60000)
+                .setup();
     }
 
     /**
