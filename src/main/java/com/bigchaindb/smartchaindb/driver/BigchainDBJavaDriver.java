@@ -57,10 +57,10 @@ public class BigchainDBJavaDriver {
         List<String> rfq_ids = new ArrayList<>();
         List<String> create_ids = new ArrayList<>();
         Transaction winningBid = null;
-        int rfq_count = 20;
-        int create_count = 1000;
-        int bid_count = 1000;
-        int bids_per_rfq = 50;
+        int rfq_count = 100;
+        int create_count = 2500;
+        int bid_count = 2500;
+        int bids_per_rfq = 25;
         int counter = 0;
         //create rfqs 
         for(int j = 0; j < rfq_count; j++) {
@@ -96,7 +96,7 @@ public class BigchainDBJavaDriver {
      */
     public static void setConfig() {
         // Single-Node Setup
-        //BigchainDbConfigBuilder.baseUrl("http://152.7.176.32:9984/").setup();
+        BigchainDbConfigBuilder.baseUrl("http://152.7.176.32:9984/").setup();
 
         // Multi-Node Setup
         List<Connection> connections = new ArrayList<>();
@@ -106,10 +106,10 @@ public class BigchainDBJavaDriver {
             connections.add(new Connection(attributes));
         }
 
-         BigchainDbConfigBuilder
-                .addConnections(connections)
-                .setTimeout(60000)
-                .setup();
+         //BigchainDbConfigBuilder
+          //      .addConnections(connections)
+          //      .setTimeout(60000)
+          //      .setup();
     }
 
     /**
