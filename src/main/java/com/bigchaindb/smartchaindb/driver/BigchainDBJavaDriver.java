@@ -100,7 +100,7 @@ public class BigchainDBJavaDriver {
      */
     public static void setConfig() {
         // Single-Node Setup
-        BigchainDbConfigBuilder.baseUrl("http://143.198.113.40:9984/").setup();
+        //BigchainDbConfigBuilder.baseUrl("http://68.183.123.228:9984/").setup();
 
         // Multi-Node Setup
         List<Connection> connections = new ArrayList<>();
@@ -111,10 +111,10 @@ public class BigchainDBJavaDriver {
         }
 
 
-         //BigchainDbConfigBuilder
-          //      .addConnections(connections)
-          //      .setTimeout(60000)
-          //      .setup();
+         BigchainDbConfigBuilder
+                .addConnections(connections)
+                .setTimeout(60000)
+                .setup();
     }
 
     /**
