@@ -134,6 +134,7 @@ public interface Capabilities {
         cap.add(Capabilities.ULTRASONIC_WELDING);
         cap.add(Capabilities.HEATED_AIR_WELDING);
         cap.add(Capabilities.FRICTION_WELDING);
+		// 15
         cap.add(Capabilities.METAL_WELDING);
         cap.add(Capabilities.ARC_WELDING);
         cap.add(Capabilities.RESISTANCE_WELDING);
@@ -149,33 +150,39 @@ public interface Capabilities {
         cap.add(Capabilities.PRESSING);
         cap.add(Capabilities.SHRINKING);
         cap.add(Capabilities.FOLDING);
-        /*
-                cap.add(Capabilities.TWISTING);
-        cap.add(Capabilities.BENDING);
-        cap.add(Capabilities.HAMMERING);
-        cap.add(Capabilities.MATING);
-        cap.add(Capabilities.ORIENTING);
-        cap.add(Capabilities.FLIPPING);
-        cap.add(Capabilities.HOLDING);
-        cap.add(Capabilities.PICKING);
-        cap.add(Capabilities.POSITIONING);
-        cap.add(Capabilities.GRASPING);
-        cap.add(Capabilities.PLACING);
-        cap.add(Capabilities.BULK_FEEDING);
-        cap.add(Capabilities.TRAY_FEEDING);
-        cap.add(Capabilities.TUBE_FEEDING);
-        cap.add(Capabilities.TAPE_FEEDING);
-        cap.add(Capabilities.TURNING);
-        cap.add(Capabilities.MILLING);
-        cap.add(Capabilities.DRILLING);
-        cap.add(Capabilities.THREADING);
-        cap.add(Capabilities.BORING);
-        cap.add(Capabilities.GROOVING);
-        cap.add(Capabilities.MOULDING);
-        cap.add(Capabilities.CASTING);
-         */
-
-
+		// 30
+        // cap.add(Capabilities.TWISTING);
+        // cap.add(Capabilities.BENDING);
+        // cap.add(Capabilities.HAMMERING);
+        // cap.add(Capabilities.MATING);
+        // cap.add(Capabilities.ORIENTING);
+        // cap.add(Capabilities.FLIPPING);
+        // cap.add(Capabilities.HOLDING);
+        // cap.add(Capabilities.PICKING);
+        // cap.add(Capabilities.POSITIONING);
+        // cap.add(Capabilities.GRASPING);
+        // cap.add(Capabilities.PLACING);
+        // cap.add(Capabilities.BULK_FEEDING);
+        // cap.add(Capabilities.TRAY_FEEDING);
+        // cap.add(Capabilities.TUBE_FEEDING);
+        // cap.add(Capabilities.TAPE_FEEDING);
+		// // 45
+        // cap.add(Capabilities.TURNING);
+        // cap.add(Capabilities.MILLING);
+        // cap.add(Capabilities.DRILLING);
+        // cap.add(Capabilities.THREADING);
+        // cap.add(Capabilities.BORING);
+        // cap.add(Capabilities.GROOVING);
+        // cap.add(Capabilities.MOULDING);
+        // cap.add(Capabilities.CASTING);
+        // cap.add(Capabilities.NEW_POSITIONING);
+        // cap.add(Capabilities.NEW_GRASPING);
+        // cap.add(Capabilities.NEW_PLACING);
+        // cap.add(Capabilities.NEW_BULK_FEEDING);
+        // cap.add(Capabilities.NEW_TRAY_FEEDING);
+        // cap.add(Capabilities.NEW_TUBE_FEEDING);
+        // cap.add(Capabilities.NEW_TAPE_FEEDING);
+		// 60
 
         return cap;
     }
