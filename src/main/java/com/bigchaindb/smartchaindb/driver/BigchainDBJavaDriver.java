@@ -8,17 +8,12 @@ import com.bigchaindb.model.GenericCallback;
 import com.bigchaindb.model.MetaData;
 import com.bigchaindb.model.Transaction;
 import okhttp3.Response;
-import com.bigchaindb.constants.Operations;
 
 import java.security.KeyPair;
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Random;
-import com.bigchaindb.model.Transactions; 
 
 import java.util.concurrent.*;
 /**
@@ -35,19 +30,6 @@ public class BigchainDBJavaDriver {
      * @param args
      */
     public static void main(String[] args) throws Exception {
-
-        /* -
-        // GJoin: Uncomment this block if group manager is set up. Make sure GROUP_SIGNATURE flag
-        // in DriverConstants is set to true
-        String out = new Scanner(new URL(DriverConstants.GROUP_MANAGER_ENDPOINT + "?id=1&usk=1")
-                .openStream(), "UTF-8").useDelimiter("\\A").next();
-        String[] parts = out.split("\\|");
-        String payloadString = "{transaction: test, tester: sen}";
-        String secretKey='"'+parts[0].replaceAll(",","comma") +'"';
-        String publicKey= '"'+parts[1].replaceAll(",","comma") + '"';
-        String jsonPayload='"'+payloadString.replaceAll(",","comma")+ '"';
-        */
-
         setConfig();
 
         KeyPair sellerKeyPair = BigchainDBJavaDriver.getKeys();
@@ -59,9 +41,6 @@ public class BigchainDBJavaDriver {
         List<String> buyerCreateIds = new CopyOnWriteArrayList<>();
         List<String> advIds = new CopyOnWriteArrayList<>();
         List<String> buyOfferIds = new CopyOnWriteArrayList<>();
-        List<String> invalidAdvIds = new CopyOnWriteArrayList<>();
-        List<String> invalidBuyOfferIds = new CopyOnWriteArrayList<>();
-        List<String> invalidSellIds = new CopyOnWriteArrayList<>();
         
         int validAssetCount = 1500;
         int invalidAssetCount = 0;
@@ -222,81 +201,6 @@ public class BigchainDBJavaDriver {
                 }).get();
             }
         
-            // Step 7: Create invalid advertisements (duplicates with open status)
-            // for (int i = 0; i < validAssetCount * 0.1; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (sellerCreateIds.size() > index) {
-            //                 String createId = sellerCreateIds.get(index);
-            //                 Transaction invalidAdvTransaction = Simulation.createAdv(driver, sellerKeyPair, createId, "Open");
-            //                 if (invalidAdvTransaction != null && invalidAdvTransaction.getId() != null) {
-            //                     invalidAdvIds.add(invalidAdvTransaction.getId());
-            //                     System.out.println("Invalid Advertisement " + (index + 1) + " Created: " + invalidAdvTransaction.getId());
-            //                 } else {
-            //                     System.err.println("Failed to create Invalid Advertisement for Seller Asset " + (index + 1));
-            //                 }
-            //             } else {
-            //                 System.err.println("Seller Asset not available for Invalid Advertisement creation at index: " + index);
-            //             }
-            //             Thread.sleep(100); // Optional delay to avoid overload
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
-        
-            // Step 8: Create invalid buy offers (referencing closed advertisements)
-            // for (int i = 0; i < validAssetCount * 0.1; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (advIds.size() > index && buyerCreateIds.size() > index) {
-            //                 String advId = advIds.get(index);
-            //                 Simulation.updateAdv(driver, sellerKeyPair, sellerCreateIds.get(index), advId); // Close the advertisement
-            //                 Transaction invalidBuyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateIds.get(index));
-            //                 if (invalidBuyOfferTransaction != null && invalidBuyOfferTransaction.getId() != null) {
-            //                     invalidBuyOfferIds.add(invalidBuyOfferTransaction.getId());
-            //                     System.out.println("Invalid Buy Offer " + (index + 1) + " Created: " + invalidBuyOfferTransaction.getId());
-            //                 } else {
-            //                     System.err.println("Failed to create Invalid Buy Offer for Advertisement " + (index + 1));
-            //                 }
-            //             } else {
-            //                 System.err.println("Advertisement or Buyer Asset not available for Invalid Buy Offer creation at index: " + index);
-            //             }
-            //             Thread.sleep(100); // Optional delay to avoid overload
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
-        
-            // Step 9: Create invalid sell transactions (referencing closed advertisements)
-            // for (int i = 0; i < validAssetCount * 0.1; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (sellerCreateIds.size() > index && advIds.size() > index && invalidBuyOfferIds.size() > index) {
-            //                 String createId = sellerCreateIds.get(index);
-            //                 String advId = advIds.get(index);
-            //                 String buyOfferId = invalidBuyOfferIds.get(index);
-            //                 Transaction invalidSellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
-            //                 if (invalidSellTransaction != null && invalidSellTransaction.getId() != null) {
-            //                     invalidSellIds.add(invalidSellTransaction.getId());
-            //                     System.out.println("Invalid Sell Transaction " + (index + 1) + " Created: " + invalidSellTransaction.getId());
-            //                 } else {
-            //                     System.err.println("Failed to create Invalid Sell Transaction for Advertisement " + (index + 1));
-            //                 }
-            //             } else {
-            //                 System.err.println("Seller Asset, Advertisement, or Invalid Buy Offer not available for Invalid Sell Transaction creation at index: " + index);
-            //             }
-            //             Thread.sleep(100); // Optional delay to avoid overload
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
-        
             System.out.println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
         
         } catch (InterruptedException e) {
@@ -315,52 +219,6 @@ public class BigchainDBJavaDriver {
                 Thread.currentThread().interrupt();
             }
         }
-        // Transaction rfq1 = null;
-        // Transaction bid1 = null;
-        // List<String> rfq_ids = new ArrayList<>();
-        // List<String> create_ids = new ArrayList<>();
-        // List<String> win_bid_ids = new ArrayList<>();
-        // Transaction winningBid = null;
-        // int rfq_count = 200;
-        // int create_count = 5000;
-        // int bid_count = 5000;
-        // int bids_per_rfq = 25;
-        // int counter = 0;
-        // //create rfqs 
-        // for(int j = 0; j < rfq_count; j++) {
-        //     Transaction rfq = Simulation.createRFQ(driver, keys, null);
-        //     rfq_ids.add(rfq.getId());
-        // }
-        // // create assests seperately 
-        // for(int k = 0; k < create_count; k++) {
-        //     String createId = Simulation.createCreate(driver, keys);
-        //     create_ids.add(createId);
-        // }
-        // for(int i = 0; i  < rfq_ids.size() ; i++){
-        //     String rfqId = rfq_ids.get(i);
-        //     List<Transaction> bids = new ArrayList<>();
-        //     for(int j = 0;  j < bids_per_rfq; j++) {
-        //         String createId = create_ids.get(counter);
-        //         counter ++;
-        //         bids.add(Simulation.createBid(driver, keys, rfqId, createId));
-        //     }
-        //     Random rand = new Random();
-        //     winningBid = bids.get(rand.nextInt(bids.size()));
-        //     win_bid_ids.add(winningBid.getId());}
-
-        // for(int j = 0; j < rfq_ids.size() ; j++){
-        //     String rfq_Id = rfq_ids.get(j);
-        //     MetaData metaData = new MetaData();
-        //     metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-        //     Transactions.doAccept(driver, win_bid_ids.get(j), rfq_Id, metaData, keys);
-        // }
-    
-
-        // //Simulation.createBid(driver, keys, rfq.getId());
-
-        // // MetaData metaData = new MetaData();
-        // // metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-        // // Transactions.doAccept(driver, bid1.getId(), rfq1.getId(), metaData, keys);
     }
 
     /**
