@@ -233,16 +233,6 @@ public class Simulation {
                 put("machineIdentifier", "X100" + LocalDateTime.now().toString());
             }};
 
-/*             MetaData creMetaData = new MetaData();
-            creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-            String createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
-            Thread.sleep(5000); */
-
-            //MetaData metaData1 = new MetaData();
-            //metaData1.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-            //Transactions.doTransfer(driver, createId, metaData1, keys, transferKeys);
-            //Thread.sleep(2000);
-
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             bid = Transactions.doBid(driver, createId, rfqId, metaData2, keys);
@@ -252,6 +242,139 @@ public class Simulation {
         }
 
         return bid;
+    }
+
+    public static Transaction createBuyOffer(BigchainDBJavaDriver driver, KeyPair buyerKeys,String advId, String createId) {
+        
+        Transaction buy = null;
+
+        try {
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("minAmt", "1");
+            buy = Transactions.doBuyOffer(driver, createId, advId, metaData2, buyerKeys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return buy;
+    }
+
+    public static Transaction createSell(BigchainDBJavaDriver driver, KeyPair Keys,String txId,String advId, String buyOfferId) {
+        
+        Transaction sell = null;
+
+        try {
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            sell = Transactions.doSell(driver, txId, advId, buyOfferId, metaData2, Keys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sell;
+    }
+
+    
+    public static Transaction createReturnSell(BigchainDBJavaDriver driver, KeyPair buyerKeys,String sellId, String createId) {
+        
+        Transaction buy = null;
+
+        try {
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            buy = Transactions.doReturnSell(driver, sellId, createId, metaData2, buyerKeys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return buy;
+    }
+
+    public static Transaction createAcceptReturn(BigchainDBJavaDriver driver, KeyPair Keys,String assetdId,String returnId, String sellId) {
+        
+        Transaction sell = null;
+
+        try {
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            sell = Transactions.doAcceptReturn(driver, assetdId, returnId, sellId, metaData2, Keys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sell;
+    }
+
+
+    public static Transaction createAdv(BigchainDBJavaDriver driver, KeyPair keys, String createId, String status) {
+        
+        Transaction adv = null;
+
+        try {
+            
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("kafkaInTimestamp", LocalDateTime.now().toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("status", status);
+            metaData2.setMetaData("minAmt", "1");
+            adv = Transactions.doAdv(driver, createId, metaData2, keys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return adv;
+    }
+
+    public static Transaction updateAdv(BigchainDBJavaDriver driver, KeyPair keys, String createId, String advId) {
+        
+        Transaction adv = null;
+
+        try {
+            
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("kafkaInTimestamp", LocalDateTime.now().toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("status", "Closed");
+            
+            adv = Transactions.updateAdv(driver, createId, advId, metaData2, keys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return adv;
+    }
+
+    public static Transaction updateAdv(BigchainDBJavaDriver driver, KeyPair keys, String createId,String advId, String status) {
+        
+        Transaction adv = null;
+
+        try {
+            
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("kafkaInTimestamp", LocalDateTime.now().toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("status", status);
+            adv = Transactions.doAdv(driver, createId, metaData2, keys);
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return adv;
     }
 
     public static void createAccept(BigchainDBJavaDriver driver, KeyPair keys) throws Exception {

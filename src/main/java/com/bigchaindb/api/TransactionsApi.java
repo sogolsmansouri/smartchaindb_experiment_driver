@@ -136,4 +136,32 @@ public class TransactionsApi extends AbstractApi {
 		response.close();
 		return JsonUtils.fromJson(body, Transactions.class);
 	}
+
+	public static List<String> getTransferTransactionIdsByAssetId(String assetId) throws IOException {
+		log.debug("getTransferTransactionIdsByAssetId Call: " + assetId);
+		
+		// Construct the URL to get transfer transactions for the given asset ID
+		String url = BigChainDBGlobals.getBaseUrl() + BigchainDbApi.TRANSACTIONS + "?asset_id=" + assetId + "&operation=TRANSFER";
+		
+		// Send the GET request to the server
+		Response response = NetworkUtils.sendGetRequest(url);
+		String body = response.body().string();
+		response.close();
+		
+		// Convert the response to a Transactions object
+		Transactions transferTxns = JsonUtils.fromJson(body, Transactions.class);
+		
+		// Extract and return the transaction IDs without quotes
+		List<String> transferIds = new ArrayList<>();
+		if (transferTxns != null && transferTxns.getTransactions() != null) {
+			for (Transaction txn : transferTxns.getTransactions()) {
+				// Use trim or replace to remove quotes if present
+				String txnId = txn.getId().replace("\"", "").trim();
+				transferIds.add(txnId);
+			}
+		}
+		
+		return transferIds;
+	}
+	
 }

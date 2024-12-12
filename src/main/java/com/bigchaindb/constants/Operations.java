@@ -28,8 +28,18 @@ public enum Operations {
 
 	BID("BID"),
 
-	ACCEPT("ACCEPT");
+	ACCEPT("ACCEPT"),
+	
+	ADV("ADV"),
+	UPDATE_ADV("UPDATE_ADV"),
 
+	BUYOFFER("BUYOFFER"),
+
+	INVERSE_TXN("INVERSE_TXN"),
+
+	SELL("SELL"),
+
+	ACCEPT_RETURN("ACCEPT_RETURN");
 
 	/** The value. */
 	private final String value;

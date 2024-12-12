@@ -217,6 +217,201 @@ public class Transactions {
         return transaction;
     }
 
+    public static Transaction doBuyOffer(BigchainDBJavaDriver driver, String txId, String advTxId, MetaData metaData, KeyPair buyerKeys) throws Exception {
+
+        Transaction transaction = null;
+        Map<String, String> assetData = new TreeMap<String, String>();
+        assetData.put("id", txId);
+        assetData.put("adv_id", advTxId);
+
+        try {
+
+            FulFill fulfill = new FulFill();
+            fulfill.setOutputIndex(0);
+            fulfill.setTransactionId(txId);
+
+            BigchainDbTransactionBuilder.IBuild builder = BigchainDbTransactionBuilder
+                    .init()
+                    .addInput(null, fulfill, (EdDSAPublicKey) buyerKeys.getPublic())
+                    .addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
+                    .addAssets(assetData, TreeMap.class)
+                    .addMetaData(metaData)
+                    .operation(Operations.BUYOFFER)
+                    .buildAndSign((EdDSAPublicKey) buyerKeys.getPublic(), (EdDSAPrivateKey) buyerKeys.getPrivate());
+
+            transaction = builder.sendTransaction(driver.handleServerResponse("BUYOFFER", metaData, null));
+            System.out.println("(*) BUYOFFER Transaction sent.. - " + transaction.getId());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
+
+
+    public static Transaction doReturnSell(BigchainDBJavaDriver driver, String originalAssetId, String transferTxnId, MetaData metaData, KeyPair buyerKeys) throws Exception {
+
+        Transaction transaction = null;
+        Map<String, String> assetData = new TreeMap<>();
+        assetData.put("asset_id", originalAssetId);  // Use the original asset ID, not the transfer transaction ID
+        assetData.put("sell_id", transferTxnId);  // Track the sell transaction ID if needed
+    
+        try {
+            // Use the last transfer transaction as the input reference
+            FulFill fulfill = new FulFill();
+            fulfill.setOutputIndex(0);  // Assuming the output index is 0
+            fulfill.setTransactionId(transferTxnId);  // The transfer transaction ID where ownership was moved to buyer
+    
+            // Create the return transaction targeting the escrow/seller account
+            BigchainDbTransactionBuilder.IBuild builder = BigchainDbTransactionBuilder
+                    .init()
+                    .addInput(null, fulfill, (EdDSAPublicKey) buyerKeys.getPublic())  // Use buyer’s public key to sign
+                    .addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)  // Transfer ownership to escrow
+                    .addAssets(assetData, TreeMap.class)
+                    .addMetaData(metaData)
+                    .operation(Operations.PRE_REQUEST)  // Ensure operation type is correct
+                    .buildAndSign((EdDSAPublicKey) buyerKeys.getPublic(), (EdDSAPrivateKey) buyerKeys.getPrivate());
+    
+            // Send the return transaction
+            transaction = builder.sendTransaction(driver.handleServerResponse("INVERSE_TXN", metaData, null));
+            System.out.println("(*) INVERSE_TXN Transaction sent.. - " + transaction.getId());
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+        return transaction;
+    }
+    
+
+
+    public static Transaction doAdv(BigchainDBJavaDriver driver, String txId, MetaData metaData, KeyPair keys) throws Exception {
+
+        Transaction transaction = null;
+        Map<String, String> assetData = new TreeMap<String, String>();
+        
+        assetData.put("asset_id", txId);
+        //assetData.put("status", "open");
+        try {
+                // FulFill fulfill = new FulFill();
+                // fulfill.setOutputIndex(0);
+                // fulfill.setTransactionId(txId);
+
+                BigchainDbTransactionBuilder.IBuild builder = BigchainDbTransactionBuilder
+                        .init()
+                        
+                        .addAssets(assetData, TreeMap.class)
+                        .addMetaData(metaData)
+                        .operation(Operations.ADV)
+                        .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate());
+
+                transaction = builder.sendTransaction(driver.handleServerResponse("ADV", metaData, null));
+                System.out.println("(*) ADV Transaction sent.. - " + transaction.getId());
+                //.addInput(null, fulfill, (EdDSAPublicKey) keys.getPublic())
+                //.addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
+
+    public static Transaction updateAdv(BigchainDBJavaDriver driver, String txId, String advId, MetaData metaData, KeyPair keys) throws Exception {
+
+        Transaction transaction = null;
+        Map<String, String> assetData = new TreeMap<String, String>();
+        
+        assetData.put("asset_id", txId);
+        assetData.put("adv_id", advId);
+        //assetData.put("status", "open");
+        try {
+                // FulFill fulfill = new FulFill();
+                // fulfill.setOutputIndex(0);
+                // fulfill.setTransactionId(txId);
+
+                BigchainDbTransactionBuilder.IBuild builder = BigchainDbTransactionBuilder
+                        .init()
+                        
+                        .addAssets(assetData, TreeMap.class)
+                        .addMetaData(metaData)
+                        .operation(Operations.REQUEST_FOR_QUOTE)
+                        .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate());
+
+                transaction = builder.sendTransaction(driver.handleServerResponse("UPDATE_ADV", metaData, null));
+                System.out.println("(*) UPDATE_ADV Transaction sent.. - " + transaction.getId());
+                //.addInput(null, fulfill, (EdDSAPublicKey) keys.getPublic())
+                //.addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
+
+    public static Transaction doSell(BigchainDBJavaDriver driver, String txId,String advId, String buyOfferId, MetaData metaData, KeyPair keys) throws Exception {
+
+        Transaction transaction = null;
+        Map<String, String> assetData = new TreeMap<String, String>();
+        
+        assetData.put("asset_id", txId);
+        assetData.put("ref1_id", advId);
+        assetData.put("ref2_id", buyOfferId);
+        try {
+                FulFill fulfill = new FulFill();
+                fulfill.setOutputIndex(0);
+                fulfill.setTransactionId(txId);
+
+                BigchainDbTransactionBuilder.IBuild builder = BigchainDbTransactionBuilder
+                        .init()
+                        .addInput(null, fulfill, (EdDSAPublicKey) keys.getPublic())
+                        .addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
+                        .addAssets(assetData, TreeMap.class)
+                        .addMetaData(metaData)
+                        .operation(Operations.SELL)
+                        .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate());
+
+                transaction = builder.sendTransaction(driver.handleServerResponse("SELL", metaData, null));
+                System.out.println("(*) SELL Transaction sent.. - " + transaction.getId());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
+
+    public static Transaction doAcceptReturn(BigchainDBJavaDriver driver, String originalAssetId, String transferTxnId, String inverseId, MetaData metaData, KeyPair keys) throws Exception {
+
+        Transaction transaction = null;
+        Map<String, String> assetData = new TreeMap<String, String>();
+        
+        assetData.put("asset_id", originalAssetId);
+        assetData.put("ref1_id", transferTxnId);
+        assetData.put("ref2_id", inverseId);
+        try {
+                FulFill fulfill = new FulFill();
+                fulfill.setOutputIndex(0);
+                fulfill.setTransactionId(transferTxnId);
+
+                BigchainDbTransactionBuilder.IBuild builder = BigchainDbTransactionBuilder
+                        .init()
+                        .addInput(null, fulfill, (EdDSAPublicKey) keys.getPublic())
+                        .addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
+                        .addAssets(assetData, TreeMap.class)
+                        .addMetaData(metaData)
+                        .operation(Operations.INTEREST)
+                        .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate());
+
+                transaction = builder.sendTransaction(driver.handleServerResponse("ACCEPT_RETURN", metaData, null));
+                System.out.println("(*) ACCEPT_RETURN Transaction sent.. - " + transaction.getId());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return transaction;
+    }
 
     public static void doAccept(BigchainDBJavaDriver driver, String winningBidTxId, String rfqTxId, MetaData metaData, KeyPair keys) throws Exception {
 
