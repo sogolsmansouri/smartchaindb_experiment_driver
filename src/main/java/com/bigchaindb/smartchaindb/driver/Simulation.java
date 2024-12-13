@@ -203,17 +203,6 @@ public class Simulation {
             MetaData creMetaData = new MetaData();
             creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
-            Thread.sleep(5000);
-
-            //MetaData metaData1 = new MetaData();
-            //metaData1.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-            //Transactions.doTransfer(driver, createId, metaData1, keys, transferKeys);
-            //Thread.sleep(2000);
-/* 
-            MetaData metaData2 = new MetaData();
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
-            bid = Transactions.doBid(driver, createId, rfqId, metaData2, keys);
-            Thread.sleep(2000); */
         } catch (Exception e) {
             e.printStackTrace();
         }

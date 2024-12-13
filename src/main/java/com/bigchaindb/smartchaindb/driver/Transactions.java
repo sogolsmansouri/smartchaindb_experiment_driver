@@ -1,5 +1,6 @@
 package com.bigchaindb.smartchaindb.driver;
 
+import com.bigchaindb.api.TransactionsApi;
 import com.bigchaindb.builders.BigchainDbTransactionBuilder;
 import com.bigchaindb.constants.Operations;
 import com.bigchaindb.model.FulFill;
@@ -38,6 +39,13 @@ public class Transactions {
             transaction = builder.sendTransaction(driver.handleServerResponse("CREATE", null, null));
             System.out.println("(*) CREATE Transaction sent.. - " + transaction.getId());
 
+            if (transaction != null) {
+                displayPrettyTx(transaction);
+    
+                if (driver.COMMIT_CREATE_TX) {
+                    TransactionsApi.waitForCommit(transaction.getId());
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -445,5 +453,12 @@ public class Transactions {
                 .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate());
 
         return builder.validateTransaction();
+    }
+
+    public static void displayPrettyTx(Transaction tx) {
+        String msg = "DETAILS OF TX " + tx.getId();
+        System.out.println("\n\n================ " + msg + " ===================");
+        System.out.println(tx);
+        System.out.println("================ END " + msg + " ===================\n\n");
     }
 }

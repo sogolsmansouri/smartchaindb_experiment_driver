@@ -42,31 +42,31 @@ public class BigchainDBJavaDriver {
             "Seller Asset",
             sellerCreateIds
         )
-        // .thenCompose(v -> executeAndProcess(
-        //     createBuyerAssetsTasks(validAssetCount, driver, buyerKeyPair),
-        //     "Buyer Asset",
-        //     buyerCreateIds
-        // ))
-        // .thenCompose(v -> executeAndProcess(
-        //     createAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair),
-        //     "Advertisement",
-        //     advIds
-        // ))
-        // .thenCompose(v -> executeAndProcess(
-        //     createBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair),
-        //     "Buy Offer",
-        //     buyOfferIds
-        // ))
-        // .thenCompose(v -> executeAndProcess(
-        //     createSellTasks(sellerCreateIds, advIds, buyOfferIds, driver, sellerKeyPair),
-        //     "Sell Transaction",
-        //     sellIds
-        // ))
-        // .thenCompose(v -> executeAndProcess(
-        //     createReturnTasks(sellIds, buyOfferIds, driver, sellerKeyPair, buyerKeyPair, (int) (validAssetCount * 0.2)),
-        //     "Return Handling",
-        //     null // Not collecting IDs here
-        // ))
+        .thenCompose(v -> executeAndProcess(
+            createBuyerAssetsTasks(validAssetCount, driver, buyerKeyPair),
+            "Buyer Asset",
+            buyerCreateIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair),
+            "Advertisement",
+            advIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair),
+            "Buy Offer",
+            buyOfferIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createSellTasks(sellerCreateIds, advIds, buyOfferIds, driver, sellerKeyPair),
+            "Sell Transaction",
+            sellIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createReturnTasks(sellIds, buyOfferIds, driver, sellerKeyPair, buyerKeyPair, (int) (validAssetCount * 0.2)),
+            "Return Handling",
+            null // Not collecting IDs here
+        ))
         .thenAccept(v -> {
             println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
             // Shutdown the shared executor if implemented in Promise (if needed):
