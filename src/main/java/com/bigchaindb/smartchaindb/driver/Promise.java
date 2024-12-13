@@ -8,42 +8,39 @@ import java.util.function.Supplier;
 
 public class Promise {
 
-    /**
-     * Executes a collection of Supplier tasks asynchronously and returns a CompletableFuture
-     * that completes with a list of Settlement objects once all tasks have settled.
-     *
-     * @param tasks The collection of Supplier tasks to execute.
-     * @param <T>   The type of the result produced by the tasks.
-     * @return A CompletableFuture containing a list of Settlements for each task.
-     */
-    public static <T> CompletableFuture<List<Settlement<T>>> allSettled(Collection<Supplier<T>> tasks) {
-        ExecutorService executor = Executors.newFixedThreadPool(Math.min(tasks.size(), Runtime.getRuntime().availableProcessors()));
-        List<CompletableFuture<Settlement<T>>> futures = new ArrayList<>();
+    private static final ExecutorService SHARED_EXECUTOR = Executors.newCachedThreadPool();
 
+    public static <T> CompletableFuture<List<Settlement<T>>> allSettled(Collection<Supplier<T>> tasks) {
+        List<CompletableFuture<Settlement<T>>> futures = new ArrayList<>();
         for (Supplier<T> task : tasks) {
-            CompletableFuture<Settlement<T>> future = CompletableFuture.supplyAsync(task, executor)
-                    .<Settlement<T>>thenApply(Settlement::fulfilled)
-                    .exceptionally(Settlement::rejected);
-            futures.add(future);
+            futures.add(CompletableFuture.supplyAsync(task, SHARED_EXECUTOR)
+                    .thenApply(Settlement::fulfilled)
+                    .exceptionally(Settlement::rejected));
         }
 
-        // Combine all futures into one CompletableFuture
-        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenApply(v -> {
+                    List<Settlement<T>> settlements = new ArrayList<>();
+                    for (CompletableFuture<Settlement<T>> f : futures) {
+                        settlements.add(f.join());
+                    }
+                    return settlements;
+                });
+    }
 
-        // After all are done, collect the results
-        CompletableFuture<List<Settlement<T>>> allSettledFuture = allOf.thenApply(v -> {
-            List<Settlement<T>> settlements = new ArrayList<>();
-            for (CompletableFuture<Settlement<T>> future : futures) {
-                try {
-                    settlements.add(future.get());
-                } catch (InterruptedException | ExecutionException e) {
-                    settlements.add(Settlement.rejected(e));
-                }
+    /**
+     * Call this method after all asynchronous tasks have completed to terminate the executor.
+     */
+    public static void shutdown() {
+        SHARED_EXECUTOR.shutdown();
+        
+        try {
+            if (!SHARED_EXECUTOR.awaitTermination(60, TimeUnit.SECONDS)) {
+                SHARED_EXECUTOR.shutdownNow();
             }
-            executor.shutdown();
-            return settlements;
-        });
-
-        return allSettledFuture;
+        } catch (InterruptedException e) {
+            SHARED_EXECUTOR.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 }
