@@ -10,13 +10,13 @@ sourceCompatibility = 1.8
 group = 'com.bigchaindb'
 version = '0.1'
 description = 'Java Driver for Bigchaindb'
-mainClassName = 'com.bigchaindb.smartchaindb.driver.BigchainDBJavaDriver'
+mainClassName = 'com.bigchaindb.smartchaindb.driver.ProcessesRunner'
 
 jar {
     manifest {
         attributes 'Implementation-Title': description,
                    'Implementation-Version': version,
-                   'Main-Class': 'com.bigchaindb.Main'
+                   'Main-Class': 'com.bigchaindb.smartchaindb.driver.ProcessesRunner'
     }
     into 'src/main/resources', {
         from 'src/main/resources'
@@ -38,7 +38,6 @@ repositories {
 }
 
 dependencies {
-
     compile "com.complexible.stardog:server:7.3.0@pom"
     compile "com.stardog.stark.query:stardog-stark-query-api:7.3.0"
     compile "com.stardog.stark.io:stardog-stark-io-api:7.3.0"
@@ -69,21 +68,12 @@ dependencies {
 }
 
 checkstyle {
- sourceSets = []
+    sourceSets = []
 }
 
-// Custom JavaExec task to run ProcessesRunner
-task runProcessesRunner(type: JavaExec) {
-    group = 'application'
-    description = 'Runs the ProcessesRunner class'
-    classpath = sourceSets.main.runtimeClasspath // Use runtime classpath
-    main = 'com.bigchaindb.smartchaindb.driver.ProcessesRunner' // Fully qualified class name
-
+run {
     doFirst {
-        def numProcesses = project.hasProperty('numProcesses') ? project.numProcesses : '1'
+        def numProcesses = project.findProperty('numProcesses') ?: '1'
         args = [numProcesses]
     }
 }
-
-// Ensure the custom task depends on classes task to build before running
-runProcessesRunner.dependsOn classes
