@@ -5,50 +5,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessesRunner {
-
     public static void main(String[] args) {
-        String className = "com.bigchaindb.smartchaindb.driver.BigchainDBJavaDriver";
-        int numberOfProcesses = 3; // Number of SimulationRunner instances to launch
-
+        int numProcesses = getNumProcesses(args);
+        
         try {
-            runMultipleProcesses(className, numberOfProcesses);
+            startProcesses(numProcesses);
         } catch (IOException | InterruptedException e) {
             System.err.println("Error while launching processes: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    /**
-     * Launches multiple Java processes to run the specified class.
-     *
-     * @param className         The fully-qualified name of the class to run.
-     * @param numberOfProcesses The number of processes to launch.
-     * @throws IOException          If an I/O error occurs when starting the processes.
-     * @throws InterruptedException If the current thread is interrupted while waiting.
-     */
-    public static void runMultipleProcesses(String className, int numberOfProcesses)
-            throws IOException, InterruptedException {
-
-        if (className == null || className.trim().isEmpty()) {
-            throw new IllegalArgumentException("Class name cannot be null or empty.");
-        }
-
-        if (numberOfProcesses <= 0) {
-            throw new IllegalArgumentException("Number of processes must be greater than zero.");
-        }
-
-        List<Process> processes = new ArrayList<>(numberOfProcesses);
-
-        // Build the command for launching the SimulationRunner
+    private static List<String> getCommand() {
         List<String> command = new ArrayList<>();
         command.add("java");
         command.add("-cp");
-        command.add("."); // Current directory as classpath
-        command.add(className);
+        command.add(System.getProperty("java.class.path")); // Use the same classpath
+        command.add(BigchainDBJavaDriver.class.getName());
+        return command;
+    }
 
-        // Launch each process
-        for (int i = 0; i < numberOfProcesses; i++) {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
+    public static void startProcesses(int numProcesses) throws IOException, InterruptedException {
+        List<String> workerCmd = getCommand();
+        List<Process> processes = new ArrayList<>(numProcesses);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            for (Process process : processes) {
+                if (process.isAlive()) {
+                    process.destroy();
+                    System.out.println("Terminated subprocess: " + process);
+                }
+            }
+            System.out.println("All subprocesses terminated.");
+        }));
+
+        for (int i = 0; i < numProcesses; i++) {
+            ProcessBuilder processBuilder = new ProcessBuilder(workerCmd);
 
             // Optionally, set the working directory if needed
             // processBuilder.directory(new File("path/to/working/directory"));
@@ -59,16 +51,30 @@ public class ProcessesRunner {
             Process process = processBuilder.start();
             processes.add(process);
 
-            System.out.println("Started SimulationRunner process " + (i + 1));
+            System.out.println("Started BigchainDBJavaDriver process " + (i + 1) + " of " + numProcesses);
         }
 
         // Wait for all processes to complete
         for (int i = 0; i < processes.size(); i++) {
-            Process process = processes.get(i);
-            int exitCode = process.waitFor();
-            System.out.println("SimulationRunner process " + (i + 1) + " finished with exit code: " + exitCode);
+            int exitCode = processes.get(i).waitFor();
+            System.out.println("BigchainDBJavaDriver process " + (i + 1) + " of " + numProcesses + " finished with exit code: " + exitCode);
         }
 
-        System.out.println("All SimulationRunner processes have completed.");
+        System.out.println("All BigchainDBJavaDriver processes have completed.");
+    }
+
+    private static int getNumProcesses(String[] args) {
+        int num = 1;
+        if (args.length > 0) {
+            try {
+                int parsed = Integer.parseInt(args[0]);
+                if (parsed > 0) {
+                    num = parsed;
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid number of processes, defaulting to 1");
+            }
+        }
+        return num;
     }
 }

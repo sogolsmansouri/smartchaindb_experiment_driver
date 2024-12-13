@@ -30,6 +30,8 @@ public class BigchainDBJavaDriver {
      * @param args
      */
     public static void main(String[] args) throws Exception {
+        println("Running Process: " + getProcessId());
+        
         setConfig();
 
         KeyPair sellerKeyPair = BigchainDBJavaDriver.getKeys();
@@ -56,9 +58,9 @@ public class BigchainDBJavaDriver {
                         String createId = Simulation.createCreate(driver, sellerKeyPair);
                         if (createId != null) {
                             sellerCreateIds.add(createId);
-                            System.out.println("Seller Asset " + (index + 1) + " Created: " + createId);
+                            println("Seller Asset " + (index + 1) + " Created: " + createId);
                         } else {
-                            System.err.println("Failed to create Seller Asset " + (index + 1));
+                            printerr("Failed to create Seller Asset " + (index + 1));
                         }
                         Thread.sleep(100); // Optional delay to avoid overload
                     } catch (Exception e) {
@@ -75,9 +77,9 @@ public class BigchainDBJavaDriver {
                         String createId = Simulation.createCreate(driver, buyerKeyPair);
                         if (createId != null) {
                             buyerCreateIds.add(createId);
-                            System.out.println("Buyer Asset " + (index + 1) + " Created: " + createId);
+                            println("Buyer Asset " + (index + 1) + " Created: " + createId);
                         } else {
-                            System.err.println("Failed to create Buyer Asset " + (index + 1));
+                            printerr("Failed to create Buyer Asset " + (index + 1));
                         }
                         Thread.sleep(100); // Optional delay to avoid overload
                     } catch (Exception e) {
@@ -96,12 +98,12 @@ public class BigchainDBJavaDriver {
                             Transaction advTransaction = Simulation.createAdv(driver, sellerKeyPair, createId, "Open");
                             if (advTransaction != null && advTransaction.getId() != null) {
                                 advIds.add(advTransaction.getId());
-                                System.out.println("Advertisement " + (index + 1) + " Created: " + advTransaction.getId());
+                                println("Advertisement " + (index + 1) + " Created: " + advTransaction.getId());
                             } else {
-                                System.err.println("Failed to create Advertisement for Seller Asset " + (index + 1));
+                                printerr("Failed to create Advertisement for Seller Asset " + (index + 1));
                             }
                         } else {
-                            System.err.println("Seller Asset not available for Advertisement creation at index: " + index);
+                            printerr("Seller Asset not available for Advertisement creation at index: " + index);
                         }
                         Thread.sleep(100); // Optional delay to avoid overload
                     } catch (Exception e) {
@@ -121,12 +123,12 @@ public class BigchainDBJavaDriver {
                             Transaction buyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, createBuyAssetId);
                             if (buyOfferTransaction != null && buyOfferTransaction.getId() != null) {
                                 buyOfferIds.add(buyOfferTransaction.getId());
-                                System.out.println("Buy Offer " + (index + 1) + " Created: " + buyOfferTransaction.getId());
+                                println("Buy Offer " + (index + 1) + " Created: " + buyOfferTransaction.getId());
                             } else {
-                                System.err.println("Failed to create Buy Offer for Advertisement " + (index + 1));
+                                printerr("Failed to create Buy Offer for Advertisement " + (index + 1));
                             }
                         } else {
-                            System.err.println("Advertisement or Buyer Asset not available for Buy Offer creation at index: " + index);
+                            printerr("Advertisement or Buyer Asset not available for Buy Offer creation at index: " + index);
                         }
                         Thread.sleep(300); // Optional delay to avoid overload
                     } catch (Exception e) {
@@ -149,12 +151,12 @@ public class BigchainDBJavaDriver {
                             if (sellTransaction != null && sellTransaction.getId() != null) {
                                 String sellId = sellTransaction.getId();
                                 sellIds.add(sellId);
-                                System.out.println("Sell Transaction " + (index + 1) + " Created: " + sellId);
+                                println("Sell Transaction " + (index + 1) + " Created: " + sellId);
                             } else {
-                                System.err.println("Failed to create Sell Transaction for Advertisement " + (index + 1));
+                                printerr("Failed to create Sell Transaction for Advertisement " + (index + 1));
                             }
                         } else {
-                            System.err.println("Seller Asset, Advertisement, or Buy Offer not available for Sell Transaction creation at index: " + index);
+                            printerr("Seller Asset, Advertisement, or Buy Offer not available for Sell Transaction creation at index: " + index);
                         }
                         Thread.sleep(300); // Optional delay to avoid overload
                     } catch (Exception e) {
@@ -179,21 +181,21 @@ public class BigchainDBJavaDriver {
                                     if (!returnTxns.isEmpty()) {
                                         Transaction acceptReturn = Simulation.createAcceptReturn(driver, sellerKeyPair, buyOfferId, returnTxns.get(0), inverse.getId());
                                         if (acceptReturn != null && acceptReturn.getId() != null) {
-                                            System.out.println("Return and Accept Return for Sell Transaction " + (index + 1) + " Completed");
+                                            println("Return and Accept Return for Sell Transaction " + (index + 1) + " Completed");
                                         } else {
-                                            System.err.println("Failed to create Accept Return for Sell Transaction " + (index + 1));
+                                            printerr("Failed to create Accept Return for Sell Transaction " + (index + 1));
                                         }
                                     } else {
-                                        System.err.println("No return transactions available for Buy Offer ID: " + buyOfferId);
+                                        printerr("No return transactions available for Buy Offer ID: " + buyOfferId);
                                     }
                                 } else {
-                                    System.err.println("Failed to create Return Sell for Sell Transaction " + (index + 1));
+                                    printerr("Failed to create Return Sell for Sell Transaction " + (index + 1));
                                 }
                             } else {
-                                System.err.println("No transfer transactions available for Sell ID: " + sellId);
+                                printerr("No transfer transactions available for Sell ID: " + sellId);
                             }
                         } else {
-                            System.err.println("Sell Transaction not available for return handling at index: " + index);
+                            printerr("Sell Transaction not available for return handling at index: " + index);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -201,13 +203,13 @@ public class BigchainDBJavaDriver {
                 }).get();
             }
         
-            System.out.println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
+            println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
         
         } catch (InterruptedException e) {
-            System.err.println("Operation interrupted: " + e.getMessage());
+            printerr("Operation interrupted: " + e.getMessage());
             Thread.currentThread().interrupt();
         } catch (Exception e) {
-            System.err.println("An error occurred: " + e.getMessage());
+            printerr("An error occurred: " + e.getMessage());
         } finally {
             executor.shutdown();
             try {
@@ -257,16 +259,33 @@ public class BigchainDBJavaDriver {
 
         return new GenericCallback() {
             public void transactionMalformed(Response response) {
-                System.out.println("Malformed: " + response.message());
+                println("Malformed: " + response.message());
             }
 
             public void pushedSuccessfully(Response response) {
-                System.out.println("Transaction successfully posted");
+                println("Transaction successfully posted");
             }
 
             public void otherError(Response response) {
-                System.out.println("Other error: " + response.message());
+                println("Other error: " + response.message());
             }
         };
+    }
+
+    private static long getProcessId() {
+        String jvmName = java.lang.management.ManagementFactory.getRuntimeMXBean().getName();
+        try {
+            return Long.parseLong(jvmName.split("@")[0]);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    private static void println(String out) {
+        System.out.println(getProcessId() + ": " + out);
+    }
+
+    private static void printerr(String out) {
+        System.err.println(getProcessId() + ": " + out);
     }
 }
