@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 import java.util.function.Function;
 
 public class BigchainDBJavaDriver {
-    public boolean COMMIT_CREATE_TX = true;
+    public boolean COMMIT_TX = true;
 
     public static void main(String[] args) {
         println("Running Process: " + getProcessId());
@@ -271,7 +271,6 @@ public class BigchainDBJavaDriver {
             tasks.add(() -> {
                 T result = taskCreator.apply(index);
                 // Optional short delay: Remove or adjust as needed
-                // try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
                 return result;
             });
         }

@@ -95,13 +95,10 @@ public class Simulation {
                     createTxs.add(txId_cre);
                     createFile.write(txId_cre + "\n");
                     createFile.flush();
-                    Thread.sleep(100);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
-            Thread.sleep(20000);
 
             for (int i = 0; i < allPreReqs.size(); i++) {
                 try {
@@ -225,7 +222,6 @@ public class Simulation {
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             bid = Transactions.doBid(driver, createId, rfqId, metaData2, keys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -243,7 +239,6 @@ public class Simulation {
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             metaData2.setMetaData("minAmt", "1");
             buy = Transactions.doBuyOffer(driver, createId, advId, metaData2, buyerKeys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -260,7 +255,6 @@ public class Simulation {
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             sell = Transactions.doSell(driver, txId, advId, buyOfferId, metaData2, Keys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -278,7 +272,6 @@ public class Simulation {
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             buy = Transactions.doReturnSell(driver, sellId, createId, metaData2, buyerKeys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -295,7 +288,6 @@ public class Simulation {
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             sell = Transactions.doAcceptReturn(driver, assetdId, returnId, sellId, metaData2, Keys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -317,7 +309,6 @@ public class Simulation {
             metaData2.setMetaData("status", status);
             metaData2.setMetaData("minAmt", "1");
             adv = Transactions.doAdv(driver, createId, metaData2, keys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -338,7 +329,6 @@ public class Simulation {
             metaData2.setMetaData("status", "Closed");
             
             adv = Transactions.updateAdv(driver, createId, advId, metaData2, keys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -358,7 +348,6 @@ public class Simulation {
             metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             metaData2.setMetaData("status", status);
             adv = Transactions.doAdv(driver, createId, metaData2, keys);
-            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -375,7 +364,6 @@ public class Simulation {
         for (int i = RFQ_COUNT * ID; i < RFQ_COUNT * (ID + 1); i++) {
             String rfqId = RFQs.get(i);
             List<String> bids = TransactionsApi.getBidsForRFQ(rfqId);
-            Thread.sleep(2000);
 
             System.out.println(bids);
             hmap.put(rfqId, bids);
@@ -393,7 +381,6 @@ public class Simulation {
                 metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
 
                 Transactions.doAccept(driver, winningBid, entry.getKey(), metaData, keys);
-                Thread.sleep(3000);
             }
         }
     }

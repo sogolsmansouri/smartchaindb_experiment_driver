@@ -39,13 +39,8 @@ public class Transactions {
             transaction = builder.sendTransaction(driver.handleServerResponse("CREATE", null, null));
             System.out.println("(*) CREATE Transaction sent.. - " + transaction.getId());
 
-            if (transaction != null) {
-                displayPrettyTx(transaction);
-    
-                if (driver.COMMIT_CREATE_TX) {
-                    TransactionsApi.waitForCommit(transaction.getId());
-                }
-            }
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,6 +78,8 @@ public class Transactions {
             Transaction transaction = builder.sendTransaction(driver.handleServerResponse("TRANSFER", null, null));
             System.out.println("(*) TRANSFER Transaction sent.. - " + transaction.getId());
 
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,6 +117,8 @@ public class Transactions {
             transaction = builder.sendTransaction(driver.handleServerResponse("PRE_REQUEST", null, null));
             System.out.println("(*) PRE-REQUEST Transaction sent.. - " + transaction.getId());
 
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -143,6 +142,9 @@ public class Transactions {
                     .sendTransaction(driver.handleServerResponse("INTEREST", null, null));
 
             System.out.println("(*) INTEREST Transaction sent.. - " + transaction.getId());
+
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
             return transaction.getId();
 
         } catch (IOException e) {
@@ -186,6 +188,8 @@ public class Transactions {
             transaction = builder.sendTransaction(driver.handleServerResponse("REQUEST_FOR_QUOTE", metaData, txId));
             System.out.println("(*) REQUEST Transaction sent.. - " + txId);
 
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -218,6 +222,8 @@ public class Transactions {
             transaction = builder.sendTransaction(driver.handleServerResponse("BID", metaData, null));
             System.out.println("(*) BID Transaction sent.. - " + transaction.getId());
 
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -250,6 +256,8 @@ public class Transactions {
             transaction = builder.sendTransaction(driver.handleServerResponse("BUYOFFER", metaData, null));
             System.out.println("(*) BUYOFFER Transaction sent.. - " + transaction.getId());
 
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -284,7 +292,9 @@ public class Transactions {
             // Send the return transaction
             transaction = builder.sendTransaction(driver.handleServerResponse("INVERSE_TXN", metaData, null));
             System.out.println("(*) INVERSE_TXN Transaction sent.. - " + transaction.getId());
-    
+            
+            // wait until transaction is commited, or retry every second until 5 seconds
+            waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -316,6 +326,10 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("ADV", metaData, null));
                 System.out.println("(*) ADV Transaction sent.. - " + transaction.getId());
+
+                // wait until transaction is commited, or retry every second until 5 seconds
+                waitForCommit(driver, transaction); 
+
                 //.addInput(null, fulfill, (EdDSAPublicKey) keys.getPublic())
                 //.addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
         } catch (IOException e) {
@@ -348,6 +362,9 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("UPDATE_ADV", metaData, null));
                 System.out.println("(*) UPDATE_ADV Transaction sent.. - " + transaction.getId());
+
+                // wait until transaction is commited, or retry every second until 5 seconds
+                waitForCommit(driver, transaction); 
                 //.addInput(null, fulfill, (EdDSAPublicKey) keys.getPublic())
                 //.addOutput("1", DriverConstants.SMARTCHAINDB_PUBKEY)
         } catch (IOException e) {
@@ -381,7 +398,8 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("SELL", metaData, null));
                 System.out.println("(*) SELL Transaction sent.. - " + transaction.getId());
-
+                // wait until transaction is commited, or retry every second until 5 seconds
+                waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -413,7 +431,8 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("ACCEPT_RETURN", metaData, null));
                 System.out.println("(*) ACCEPT_RETURN Transaction sent.. - " + transaction.getId());
-
+                // wait until transaction is commited, or retry every second until 5 seconds
+                waitForCommit(driver, transaction); 
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -436,7 +455,9 @@ public class Transactions {
                     .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate())
                     .sendTransaction(driver.handleServerResponse("ACCEPT", metaData, null));
 
-            System.out.println("(*) ACCEPT Transaction sent.. - " + transaction.getId());
+                System.out.println("(*) ACCEPT Transaction sent.. - " + transaction.getId());
+                // wait until transaction is commited, or retry every second until 5 seconds
+                waitForCommit(driver, transaction); 
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -460,5 +481,13 @@ public class Transactions {
         System.out.println("\n\n================ " + msg + " ===================");
         System.out.println(tx);
         System.out.println("================ END " + msg + " ===================\n\n");
+    }
+
+    private static void waitForCommit(BigchainDBJavaDriver driver, Transaction transaction) {
+        if (transaction != null) {
+            if (driver.COMMIT_TX) {
+                TransactionsApi.waitForCommit(transaction.getId());
+            }
+        }
     }
 }
