@@ -63,7 +63,7 @@ public class BigchainDBJavaDriver {
         List<String> invalidBuyOfferIds = new CopyOnWriteArrayList<>();
         List<String> invalidSellIds = new CopyOnWriteArrayList<>();
         
-        int validAssetCount = 10;
+        int validAssetCount = 5;
         int invalidAssetCount = 0;
         
         ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -185,42 +185,42 @@ public class BigchainDBJavaDriver {
             }
         
             // Step 6: Handle returns for 20% of sell transactions
-            for (int i = 0; i < validAssetCount * 0.2; i++) {
-                int index = i;
-                executor.submit(() -> {
-                    try {
-                        if (sellIds.size() > index) {
-                            String sellId = sellIds.get(index);
-                            List<String> transferTxns = TransactionsApi.getTransferTransactionIdsByAssetId(sellId);
-                            if (!transferTxns.isEmpty()) {
-                                Transaction inverse = Simulation.createReturnSell(driver, buyerKeyPair, sellId, transferTxns.get(0));
-                                if (inverse != null && inverse.getId() != null) {
-                                    String buyOfferId = buyOfferIds.get(index);
-                                    List<String> returnTxns = TransactionsApi.getTransferTransactionIdsByAssetId(buyOfferId);
-                                    if (!returnTxns.isEmpty()) {
-                                        Transaction acceptReturn = Simulation.createAcceptReturn(driver, sellerKeyPair, buyOfferId, returnTxns.get(0), inverse.getId());
-                                        if (acceptReturn != null && acceptReturn.getId() != null) {
-                                            System.out.println("Return and Accept Return for Sell Transaction " + (index + 1) + " Completed");
-                                        } else {
-                                            System.err.println("Failed to create Accept Return for Sell Transaction " + (index + 1));
-                                        }
-                                    } else {
-                                        System.err.println("No return transactions available for Buy Offer ID: " + buyOfferId);
-                                    }
-                                } else {
-                                    System.err.println("Failed to create Return Sell for Sell Transaction " + (index + 1));
-                                }
-                            } else {
-                                System.err.println("No transfer transactions available for Sell ID: " + sellId);
-                            }
-                        } else {
-                            System.err.println("Sell Transaction not available for return handling at index: " + index);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }).get();
-            }
+            // for (int i = 0; i < validAssetCount * 0.2; i++) {
+            //     int index = i;
+            //     executor.submit(() -> {
+            //         try {
+            //             if (sellIds.size() > index) {
+            //                 String sellId = sellIds.get(index);
+            //                 List<String> transferTxns = TransactionsApi.getTransferTransactionIdsByAssetId(sellId);
+            //                 if (!transferTxns.isEmpty()) {
+            //                     Transaction inverse = Simulation.createReturnSell(driver, buyerKeyPair, sellId, transferTxns.get(0));
+            //                     if (inverse != null && inverse.getId() != null) {
+            //                         String buyOfferId = buyOfferIds.get(index);
+            //                         List<String> returnTxns = TransactionsApi.getTransferTransactionIdsByAssetId(buyOfferId);
+            //                         if (!returnTxns.isEmpty()) {
+            //                             Transaction acceptReturn = Simulation.createAcceptReturn(driver, sellerKeyPair, buyOfferId, returnTxns.get(0), inverse.getId());
+            //                             if (acceptReturn != null && acceptReturn.getId() != null) {
+            //                                 System.out.println("Return and Accept Return for Sell Transaction " + (index + 1) + " Completed");
+            //                             } else {
+            //                                 System.err.println("Failed to create Accept Return for Sell Transaction " + (index + 1));
+            //                             }
+            //                         } else {
+            //                             System.err.println("No return transactions available for Buy Offer ID: " + buyOfferId);
+            //                         }
+            //                     } else {
+            //                         System.err.println("Failed to create Return Sell for Sell Transaction " + (index + 1));
+            //                     }
+            //                 } else {
+            //                     System.err.println("No transfer transactions available for Sell ID: " + sellId);
+            //                 }
+            //             } else {
+            //                 System.err.println("Sell Transaction not available for return handling at index: " + index);
+            //             }
+            //         } catch (Exception e) {
+            //             e.printStackTrace();
+            //         }
+            //     }).get();
+            // }
         
             // Step 7: Create invalid advertisements (duplicates with open status)
             // for (int i = 0; i < validAssetCount * 0.1; i++) {
