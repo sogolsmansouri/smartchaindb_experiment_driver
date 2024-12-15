@@ -63,7 +63,7 @@ public class BigchainDBJavaDriver {
         List<String> invalidBuyOfferIds = new CopyOnWriteArrayList<>();
         List<String> invalidSellIds = new CopyOnWriteArrayList<>();
         
-        int validAssetCount = 1500;
+        int validAssetCount = 10;
         int invalidAssetCount = 0;
         
         ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -368,21 +368,21 @@ public class BigchainDBJavaDriver {
      */
     public static void setConfig() {
         // Single-Node Setup
-       // BigchainDbConfigBuilder.baseUrl("http://127.0.0.1:9984/").setup();
+       BigchainDbConfigBuilder.baseUrl("http://127.0.0.1:9984/").setup();
 
         // Multi-Node Setup
-        List<Connection> connections = new ArrayList<>();
-        for (String url : DriverConstants.VALIDATOR_NODES) {
-            Map<String, Object> attributes = new TreeMap<>();
-            attributes.put("baseUrl", url);
-            connections.add(new Connection(attributes));
-        }
+        // List<Connection> connections = new ArrayList<>();
+        // for (String url : DriverConstants.VALIDATOR_NODES) {
+        //     Map<String, Object> attributes = new TreeMap<>();
+        //     attributes.put("baseUrl", url);
+        //     connections.add(new Connection(attributes));
+        // }
 
 
-         BigchainDbConfigBuilder
-                .addConnections(connections)
-                .setTimeout(60000)
-                .setup();
+        //  BigchainDbConfigBuilder
+        //         .addConnections(connections)
+        //         .setTimeout(60000)
+        //         .setup();
     }
 
     /**
