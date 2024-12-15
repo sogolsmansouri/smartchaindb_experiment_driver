@@ -44,7 +44,7 @@ public class BigchainDBJavaDriver {
         List<String> advIds = new CopyOnWriteArrayList<>();
         List<String> buyOfferIds = new CopyOnWriteArrayList<>();
         
-        int validAssetCount = 1500;
+        int validAssetCount = 10;
         int invalidAssetCount = 0;
         
         ExecutorService executor = Executors.newFixedThreadPool(10);
