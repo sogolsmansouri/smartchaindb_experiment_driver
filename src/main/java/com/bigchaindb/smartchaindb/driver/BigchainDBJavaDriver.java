@@ -13,12 +13,16 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 import java.util.function.Function;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CompletableFuture;
+
 
 
 public class BigchainDBJavaDriver {
     public boolean COMMIT_TX = true;
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public static void main(String[] args) {
         println("Running Process: " + getProcessId());
@@ -29,7 +33,7 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 1;
+        int validAssetCount = 10;
         int invalidAssetCount = 0;
 
         // Transaction ID lists
@@ -55,9 +59,11 @@ public class BigchainDBJavaDriver {
             "Advertisement",
             advIds
         ))
-        .thenCompose(v -> CompletableFuture.runAsync(() -> {
-            // This is where the delay happens; the lambda doesn't need to do anything.
-        }, CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS)))
+        .thenCompose(v -> {
+            CompletableFuture<Void> delay = new CompletableFuture<>();
+            scheduler.schedule(() -> delay.complete(null), 10, TimeUnit.SECONDS); // Introduce a 10-second delay
+            return delay;
+        })
         .thenCompose(v -> executeAndProcess(
             createBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair),
             "Buy Offer",
@@ -83,6 +89,8 @@ public class BigchainDBJavaDriver {
             Promise.shutdown();
             return null;
         }).join();
+
+        scheduler.shutdown();
     }
 
     /**
