@@ -118,6 +118,7 @@ public class BigchainDBJavaDriver {
                             if (advTransaction != null && advTransaction.getId() != null) {
                                 advIds.add(advTransaction.getId());
                                 System.out.println("Advertisement " + (index + 1) + " Created: " + advTransaction.getId());
+                                waitForTransactionCommit(advTransaction.getId());
                             } else {
                                 System.err.println("Failed to create Advertisement for Seller Asset " + (index + 1));
                             }
@@ -143,6 +144,7 @@ public class BigchainDBJavaDriver {
                             if (buyOfferTransaction != null && buyOfferTransaction.getId() != null) {
                                 buyOfferIds.add(buyOfferTransaction.getId());
                                 System.out.println("Buy Offer " + (index + 1) + " Created: " + buyOfferTransaction.getId());
+                                waitForTransactionCommit(buyOfferTransaction.getId());
                             } else {
                                 System.err.println("Failed to create Buy Offer for Advertisement " + (index + 1));
                             }
@@ -362,6 +364,37 @@ public class BigchainDBJavaDriver {
         // // metaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
         // // Transactions.doAccept(driver, bid1.getId(), rfq1.getId(), metaData, keys);
     }
+
+    public void waitForTransactionCommit(String txId) {
+    try {
+        // Fetch transaction details by ID
+        Transaction transaction = TransactionsApi.getTransactionById(txId);
+
+        if (transaction == null) {
+            System.err.println("Transaction not found: " + txId);
+            return;
+        }
+
+        // Check the transaction status
+        String status = transaction.getStatus(); // Assuming the status is a field in the response
+        if (status == null) {
+            System.err.println("Transaction status is null for transaction ID: " + txId);
+            return;
+        }
+
+        // Process the status of the transaction
+        if (status.equals("COMMITTED")) {
+            System.out.println("Transaction " + txId + " is committed.");
+        } else {
+            System.out.println("Transaction " + txId + " is not yet committed. Status: " + status);
+        }
+
+    } catch (Exception e) {
+        System.err.println("Error checking transaction status for " + txId + ": " + e.getMessage());
+    }
+}
+
+    
 
     /**
      * configures connection url and credentials
