@@ -33,7 +33,7 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 5;
+        int validAssetCount = 150;
         int invalidAssetCount = 0;
 
         // Transaction ID lists
@@ -203,14 +203,23 @@ public class BigchainDBJavaDriver {
             try {
                 String advId = advIds.get(i);
                 String buyerCreateId = buyerCreateIds.get(i);
-                Transaction buyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateId);
-                if (buyOfferTransaction != null && buyOfferTransaction.getId() != null) {
-                    println("Buy Offer " + (i + 1) + " Created: " + buyOfferTransaction.getId());
-                    return buyOfferTransaction.getId();
+                Transaction committedAdvTx = TransactionsApi.waitForCommitWorkflow(advId);
+
+                if (committedAdvTx != null) {
+                    // Proceed with the buy offer creation after the advertisement is committed
+                    Transaction buyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateId);
+                    if (buyOfferTransaction != null && buyOfferTransaction.getId() != null) {
+                        println("Buy Offer " + (i + 1) + " Created: " + buyOfferTransaction.getId());
+                        return buyOfferTransaction.getId();
+                    } else {
+                        printerr("Failed to create Buy Offer " + (i + 1));
+                        return null;
+                    }
                 } else {
-                    printerr("Failed to create Buy Offer " + (i + 1));
+                    printerr("Advertisement " + advId + " was not committed. Skipping Buy Offer creation.");
                     return null;
                 }
+                
             } catch (Exception e) {
                 printerr("Exception creating Buy Offer " + (i + 1) + ": " + e.getMessage());
                 return null;
@@ -228,12 +237,19 @@ public class BigchainDBJavaDriver {
                 String createId = sellerCreateIds.get(i);
                 String advId = advIds.get(i);
                 String buyOfferId = buyOfferIds.get(i);
-                Transaction sellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
-                if (sellTransaction != null && sellTransaction.getId() != null) {
-                    println("Sell Transaction " + (i + 1) + " Created: " + sellTransaction.getId());
-                    return sellTransaction.getId();
+                Transaction committedAdvTx = TransactionsApi.waitForCommitWorkflow(buyOfferId);
+
+                if (committedAdvTx != null) {
+                    Transaction sellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
+                    if (sellTransaction != null && sellTransaction.getId() != null) {
+                        println("Sell Transaction " + (i + 1) + " Created: " + sellTransaction.getId());
+                        return sellTransaction.getId();
+                    } else {
+                        printerr("Failed to create Sell Transaction " + (i + 1));
+                        return null;
+                    }
                 } else {
-                    printerr("Failed to create Sell Transaction " + (i + 1));
+                    printerr("Advertisement " + advId + " was not committed. Skipping Buy Offer creation.");
                     return null;
                 }
             } catch (Exception e) {
@@ -251,7 +267,11 @@ public class BigchainDBJavaDriver {
         return createTasks(count, "Return Handling", i -> {
             try {
                 String sellId = sellIds.get(i);
-                List<String> transferTxns = TransactionsApi.getTransferTransactionIdsByAssetId(sellId);
+                Transaction committedAdvTx = TransactionsApi.waitForCommitWorkflow(sellId);
+
+                if (committedAdvTx != null) {
+                    List<String> transferTxns = TransactionsApi.getTransferTransactionIdsByAssetId(sellId);
+                
                 if (!transferTxns.isEmpty()) {
                     Transaction inverse = Simulation.createReturnSell(driver, buyerKeyPair, sellId, transferTxns.get(0));
                     if (inverse != null && inverse.getId() != null) {
@@ -273,6 +293,10 @@ public class BigchainDBJavaDriver {
                 } else {
                     printerr("No transfer transactions available for Sell ID: " + sellId);
                 }
+            } else {
+                printerr("Advertisement " + sellId + " was not committed. Skipping Buy Offer creation.");
+                return null;
+            }
             } catch (Exception e) {
                 printerr("Exception in Return Handling for Sell Transaction " + (i + 1) + ": " + e.getMessage());
             }

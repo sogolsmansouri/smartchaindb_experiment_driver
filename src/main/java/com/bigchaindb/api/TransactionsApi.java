@@ -166,7 +166,35 @@ public class TransactionsApi extends AbstractApi {
 	
 	public static Transaction waitForCommit(String txId) {
 		int maxRetries = 10; // Maximum number of retries
-		int sleepMillis = 1000; // Time to wait between retries (in milliseconds)
+		int sleepMillis = 2000; // Time to wait between retries (in milliseconds)
+	
+		for (int i = 0; i < maxRetries; i++) {
+			//System.out.println("--> Querying Transaction " + txId + ". Please wait..." + i);
+			try {
+				Transaction transaction = TransactionsApi.getTransactionById(txId);
+
+				if (transaction != null) {
+					System.out.println("Transaction " + txId + " is committed.");
+					return transaction;
+				}
+			} catch (Exception ex) {
+				//System.out.println("Transaction " + txId + " not found. Retrying..." + i+1);
+			} 
+			
+			try {
+				Thread.sleep(sleepMillis);
+			} catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+				throw new RuntimeException("Interrupted while waiting for transaction commit.", ex);
+			}
+		}
+	
+		return null;
+	}
+
+	public static Transaction waitForCommitWorkflow(String txId) {
+		int maxRetries = 20; // Maximum number of retries
+		int sleepMillis = 3000; // Time to wait between retries (in milliseconds)
 	
 		for (int i = 0; i < maxRetries; i++) {
 			//System.out.println("--> Querying Transaction " + txId + ". Please wait..." + i);
