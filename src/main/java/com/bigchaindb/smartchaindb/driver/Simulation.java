@@ -15,7 +15,7 @@ import java.security.SecureRandom;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.*;
-
+import java.time.format.DateTimeFormatter;
 public class Simulation {
 
 //    private static final Producer<String, String> producer = ProducerDriver.createProducer("requestor-"
@@ -201,7 +201,14 @@ public class Simulation {
             }};
 
             MetaData creMetaData = new MetaData();
-            creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            
+
+            creMetaData.setMetaData(
+                "requestCreationTimestamp", 
+                LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"))
+            );
+
+            //creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
             createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
             Thread.sleep(5000);
 

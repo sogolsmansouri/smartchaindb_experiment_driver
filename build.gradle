@@ -10,13 +10,13 @@ sourceCompatibility = 1.8
 group = 'com.bigchaindb'
 version = '0.1'
 description = 'Java Driver for Bigchaindb'
-mainClassName = 'com.bigchaindb.smartchaindb.driver.BigchainDBJavaDriver'
+mainClassName = 'com.bigchaindb.smartchaindb.driver.ProcessesRunner'
 
 jar {
     manifest {
         attributes 'Implementation-Title': description,
                    'Implementation-Version': version,
-                   'Main-Class': 'com.bigchaindb.Main'
+                   'Main-Class': 'com.bigchaindb.smartchaindb.driver.ProcessesRunner'
     }
     into 'src/main/resources', {
         from 'src/main/resources'
@@ -73,4 +73,11 @@ dependencies {
 
 checkstyle {
  sourceSets = []
+}
+
+run {
+    doFirst {
+        def numProcesses = project.findProperty('numProcesses') ?: '1'
+        args = [numProcesses]
+    }
 }

@@ -411,4 +411,21 @@ public class BigchainDBJavaDriver {
             }
         };
     }
+
+    private static long getProcessId() {
+        String jvmName = java.lang.management.ManagementFactory.getRuntimeMXBean().getName();
+        try {
+            return Long.parseLong(jvmName.split("@")[0]);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    private static void println(String out) {
+        System.out.println(getProcessId() + ": " + out);
+    }
+
+    private static void printerr(String out) {
+        System.err.println(getProcessId() + ": " + out);
+    }
 }
