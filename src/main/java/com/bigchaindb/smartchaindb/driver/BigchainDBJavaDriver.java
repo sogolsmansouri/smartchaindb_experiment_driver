@@ -33,7 +33,7 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 10;
+        int validAssetCount = 5;
         int invalidAssetCount = 0;
 
         // Transaction ID lists
@@ -74,6 +74,11 @@ public class BigchainDBJavaDriver {
             "Sell Transaction",
             sellIds
         ))
+        .thenCompose(v -> {
+            CompletableFuture<Void> delay = new CompletableFuture<>();
+            scheduler.schedule(() -> delay.complete(null), 10, TimeUnit.SECONDS); // Introduce a 10-second delay
+            return delay;
+        })
         .thenCompose(v -> executeAndProcess(
             createReturnTasks(sellIds, buyOfferIds, driver, sellerKeyPair, buyerKeyPair, (int) (validAssetCount * 0.2)),
             "Return Handling",

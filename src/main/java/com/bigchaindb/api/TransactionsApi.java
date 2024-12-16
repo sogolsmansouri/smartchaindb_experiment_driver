@@ -169,7 +169,7 @@ public class TransactionsApi extends AbstractApi {
 		int sleepMillis = 1000; // Time to wait between retries (in milliseconds)
 	
 		for (int i = 0; i < maxRetries; i++) {
-			System.out.println("--> Querying Transaction " + txId + ". Please wait..." + i);
+			//System.out.println("--> Querying Transaction " + txId + ". Please wait..." + i);
 			try {
 				Transaction transaction = TransactionsApi.getTransactionById(txId);
 
@@ -178,7 +178,7 @@ public class TransactionsApi extends AbstractApi {
 					return transaction;
 				}
 			} catch (Exception ex) {
-				System.out.println("Transaction " + txId + " not found. Retrying...");
+				//System.out.println("Transaction " + txId + " not found. Retrying..." + i+1);
 			} 
 			
 			try {
