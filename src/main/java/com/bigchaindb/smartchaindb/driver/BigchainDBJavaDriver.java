@@ -13,6 +13,9 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 import java.util.function.Function;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 
 public class BigchainDBJavaDriver {
     public boolean COMMIT_TX = true;
@@ -26,7 +29,7 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 10;
+        int validAssetCount = 1;
         int invalidAssetCount = 0;
 
         // Transaction ID lists
@@ -52,6 +55,9 @@ public class BigchainDBJavaDriver {
             "Advertisement",
             advIds
         ))
+        .thenCompose(v -> CompletableFuture.runAsync(() -> {
+            // This is where the delay happens; the lambda doesn't need to do anything.
+        }, CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS)))
         .thenCompose(v -> executeAndProcess(
             createBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair),
             "Buy Offer",

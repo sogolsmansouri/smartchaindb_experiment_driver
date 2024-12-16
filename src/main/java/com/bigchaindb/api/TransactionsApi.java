@@ -165,7 +165,7 @@ public class TransactionsApi extends AbstractApi {
 	}
 	
 	public static Transaction waitForCommit(String txId) {
-		int maxRetries = 5; // Maximum number of retries
+		int maxRetries = 10; // Maximum number of retries
 		int sleepMillis = 1000; // Time to wait between retries (in milliseconds)
 	
 		for (int i = 0; i < maxRetries; i++) {

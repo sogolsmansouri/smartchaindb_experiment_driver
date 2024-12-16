@@ -15,6 +15,7 @@ import java.security.SecureRandom;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.time.format.DateTimeFormatter;
 
 public class Simulation {
 
@@ -198,7 +199,7 @@ public class Simulation {
             }};
 
             MetaData creMetaData = new MetaData();
-            creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            creMetaData.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             createId = Transactions.doCreate(driver, cre_assetData, creMetaData, keys);
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,7 +237,7 @@ public class Simulation {
         try {
 
             MetaData metaData2 = new MetaData();
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             metaData2.setMetaData("minAmt", "1");
             buy = Transactions.doBuyOffer(driver, createId, advId, metaData2, buyerKeys);
         } catch (Exception e) {
@@ -253,7 +254,7 @@ public class Simulation {
         try {
 
             MetaData metaData2 = new MetaData();
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             sell = Transactions.doSell(driver, txId, advId, buyOfferId, metaData2, Keys);
         } catch (Exception e) {
             e.printStackTrace();
@@ -270,7 +271,7 @@ public class Simulation {
         try {
 
             MetaData metaData2 = new MetaData();
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             buy = Transactions.doReturnSell(driver, sellId, createId, metaData2, buyerKeys);
         } catch (Exception e) {
             e.printStackTrace();
@@ -286,7 +287,7 @@ public class Simulation {
         try {
 
             MetaData metaData2 = new MetaData();
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             sell = Transactions.doAcceptReturn(driver, assetdId, returnId, sellId, metaData2, Keys);
         } catch (Exception e) {
             e.printStackTrace();
@@ -305,7 +306,7 @@ public class Simulation {
 
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("kafkaInTimestamp", LocalDateTime.now().toString());
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             metaData2.setMetaData("status", status);
             metaData2.setMetaData("minAmt", "1");
             adv = Transactions.doAdv(driver, createId, metaData2, keys);
@@ -325,7 +326,7 @@ public class Simulation {
 
             MetaData metaData2 = new MetaData();
             metaData2.setMetaData("kafkaInTimestamp", LocalDateTime.now().toString());
-            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
             metaData2.setMetaData("status", "Closed");
             
             adv = Transactions.updateAdv(driver, createId, advId, metaData2, keys);
