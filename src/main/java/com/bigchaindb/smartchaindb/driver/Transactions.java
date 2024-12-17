@@ -14,6 +14,9 @@ import java.security.KeyPair;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import com.fasterxml.jackson.databind.ObjectMapper; // Jackson for JSON serialization
+import java.nio.charset.StandardCharsets;
+
 
 public class Transactions {
 
@@ -38,7 +41,12 @@ public class Transactions {
 
             transaction = builder.sendTransaction(driver.handleServerResponse("CREATE", null, null));
             System.out.println("(*) CREATE Transaction sent.. - " + transaction.getId());
+            ObjectMapper mapper = new ObjectMapper();
+                String transactionJson = mapper.writeValueAsString(transaction); // Serialize to JSON
+                int sizeInBytes = transactionJson.getBytes(StandardCharsets.UTF_8).length;
+                double sizeInKB = sizeInBytes / 1024.0;
 
+                System.out.printf("CREATE Transaction size: %d Bytes (%.3f KB)%n", sizeInBytes, sizeInKB);
             // wait until transaction is commited, or retry every second until 5 seconds
             waitForCommit(driver, transaction); 
         } catch (IOException e) {
@@ -255,7 +263,12 @@ public class Transactions {
 
             transaction = builder.sendTransaction(driver.handleServerResponse("BUYOFFER", metaData, null));
             System.out.println("(*) BUYOFFER Transaction sent.. - " + transaction.getId());
+            ObjectMapper mapper = new ObjectMapper();
+                String transactionJson = mapper.writeValueAsString(transaction); // Serialize to JSON
+                int sizeInBytes = transactionJson.getBytes(StandardCharsets.UTF_8).length;
+                double sizeInKB = sizeInBytes / 1024.0;
 
+                System.out.printf("BUYOFFER Transaction size: %d Bytes (%.3f KB)%n", sizeInBytes, sizeInKB);
             // wait until transaction is commited, or retry every second until 5 seconds
             waitForCommit(driver, transaction); 
         } catch (IOException e) {
@@ -292,7 +305,12 @@ public class Transactions {
             // Send the return transaction
             transaction = builder.sendTransaction(driver.handleServerResponse("INVERSE_TXN", metaData, null));
             System.out.println("(*) INVERSE_TXN Transaction sent.. - " + transaction.getId());
-            
+            ObjectMapper mapper = new ObjectMapper();
+                String transactionJson = mapper.writeValueAsString(transaction); // Serialize to JSON
+                int sizeInBytes = transactionJson.getBytes(StandardCharsets.UTF_8).length;
+                double sizeInKB = sizeInBytes / 1024.0;
+
+                System.out.printf("INVERSE_TXN Transaction size: %d Bytes (%.3f KB)%n", sizeInBytes, sizeInKB);
             // wait until transaction is commited, or retry every second until 5 seconds
             waitForCommit(driver, transaction); 
         } catch (IOException e) {
@@ -326,6 +344,13 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("ADV", metaData, null));
                 System.out.println("(*) ADV Transaction sent.. - " + transaction.getId());
+
+                ObjectMapper mapper = new ObjectMapper();
+                String transactionJson = mapper.writeValueAsString(transaction); // Serialize to JSON
+                int sizeInBytes = transactionJson.getBytes(StandardCharsets.UTF_8).length;
+                double sizeInKB = sizeInBytes / 1024.0;
+
+                System.out.printf("ADV Transaction size: %d Bytes (%.3f KB)%n", sizeInBytes, sizeInKB);
 
                 // wait until transaction is commited, or retry every second until 5 seconds
                 waitForCommit(driver, transaction); 
@@ -398,6 +423,12 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("SELL", metaData, null));
                 System.out.println("(*) SELL Transaction sent.. - " + transaction.getId());
+                ObjectMapper mapper = new ObjectMapper();
+                String transactionJson = mapper.writeValueAsString(transaction); // Serialize to JSON
+                int sizeInBytes = transactionJson.getBytes(StandardCharsets.UTF_8).length;
+                double sizeInKB = sizeInBytes / 1024.0;
+
+                System.out.printf("SELL Transaction size: %d Bytes (%.3f KB)%n", sizeInBytes, sizeInKB);
                 // wait until transaction is commited, or retry every second until 5 seconds
                 waitForCommit(driver, transaction); 
         } catch (IOException e) {
@@ -431,6 +462,12 @@ public class Transactions {
 
                 transaction = builder.sendTransaction(driver.handleServerResponse("ACCEPT_RETURN", metaData, null));
                 System.out.println("(*) ACCEPT_RETURN Transaction sent.. - " + transaction.getId());
+                ObjectMapper mapper = new ObjectMapper();
+                String transactionJson = mapper.writeValueAsString(transaction); // Serialize to JSON
+                int sizeInBytes = transactionJson.getBytes(StandardCharsets.UTF_8).length;
+                double sizeInKB = sizeInBytes / 1024.0;
+
+                System.out.printf("ACCEPT RETURN Transaction size: %d Bytes (%.3f KB)%n", sizeInBytes, sizeInKB);
                 // wait until transaction is commited, or retry every second until 5 seconds
                 waitForCommit(driver, transaction); 
         } catch (IOException e) {
