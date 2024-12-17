@@ -317,6 +317,24 @@ public class Simulation {
         return adv;
     }
 
+    public static Transaction createTransfer(BigchainDBJavaDriver driver, KeyPair keys, String createId, KeyPair transferKeys) {
+        
+        Transaction adv = null;
+
+        try {
+            
+
+            MetaData metaData2 = new MetaData();
+            metaData2.setMetaData("kafkaInTimestamp", LocalDateTime.now().toString());
+            metaData2.setMetaData("requestCreationTimestamp", LocalDateTime.now(Clock.systemUTC()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
+            adv = Transactions.doTransfer(driver, createId, metaData2, keys, transferKeys);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return adv;
+    }
+
     public static Transaction updateAdv(BigchainDBJavaDriver driver, KeyPair keys, String createId, String advId) {
         
         Transaction adv = null;

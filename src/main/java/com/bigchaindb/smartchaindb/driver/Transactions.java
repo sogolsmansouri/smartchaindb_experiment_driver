@@ -63,8 +63,9 @@ public class Transactions {
      * @param metaData data to append for this transaction
      * @param keys     keys to sign and verify transactions
      */
-    public static void doTransfer(BigchainDBJavaDriver driver, String txId, MetaData metaData, KeyPair keys, KeyPair transferKeys) throws Exception {
-
+    public static Transaction doTransfer(BigchainDBJavaDriver driver, String txId, MetaData metaData, KeyPair keys, KeyPair transferKeys) throws Exception {
+       
+        Transaction transaction = null;
         Map<String, String> assetData = new TreeMap<String, String>();
         assetData.put("id", txId);
 
@@ -83,7 +84,7 @@ public class Transactions {
                     .operation(Operations.TRANSFER)
                     .buildAndSign((EdDSAPublicKey) keys.getPublic(), (EdDSAPrivateKey) keys.getPrivate());
 
-            Transaction transaction = builder.sendTransaction(driver.handleServerResponse("TRANSFER", null, null));
+            transaction = builder.sendTransaction(driver.handleServerResponse("TRANSFER", null, null));
             System.out.println("(*) TRANSFER Transaction sent.. - " + transaction.getId());
 
             // wait until transaction is commited, or retry every second until 5 seconds
@@ -91,6 +92,7 @@ public class Transactions {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return transaction ;
     }
 
     public static String doPreRequest(BigchainDBJavaDriver driver, MetaData metaData, KeyPair keys,

@@ -33,8 +33,8 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 2;
-        int invalidAssetCount = 0;
+        int validAssetCount = 10;
+        int invalidAssetCount = 1;
 
         // Transaction ID lists
         List<String> sellerCreateIds = new CopyOnWriteArrayList<>();
@@ -42,7 +42,10 @@ public class BigchainDBJavaDriver {
         List<String> advIds = new CopyOnWriteArrayList<>();
         List<String> buyOfferIds = new CopyOnWriteArrayList<>();
         List<String> sellIds = new CopyOnWriteArrayList<>();
-
+        List<String> invalidAdvIds = new CopyOnWriteArrayList<>();
+        List<String> invalidBuyOfferIds = new CopyOnWriteArrayList<>();
+        List<String> invalidSellIds = new CopyOnWriteArrayList<>();
+        List<String> invalidTransferIds = new CopyOnWriteArrayList<>();
         // Execute each step in sequence:
         executeAndProcess(
             createSellerAssetsTasks(validAssetCount, driver, sellerKeyPair),
@@ -80,15 +83,37 @@ public class BigchainDBJavaDriver {
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
+            createInvalidAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
+            "Invalid Advertisement",
+            invalidAdvIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createInvalidBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair ,sellerKeyPair,sellerCreateIds,(int) (invalidAssetCount )),
+            "invalid Buy Offer",
+            invalidBuyOfferIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createInvalidSellTasks(sellerCreateIds, advIds, invalidBuyOfferIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
+            "invalid Sell Transaction",
+            invalidSellIds
+        ))
+        .thenCompose(v -> executeAndProcess(
             createReturnTasks(sellIds, buyOfferIds, driver, sellerKeyPair, buyerKeyPair, (int) (validAssetCount )),
             "Return Handling",
             null // Not collecting IDs here
         ))
+        
+        // .thenCompose(v -> executeAndProcess(
+        //     createInvalidTransferTasks(sellerCreateIds, driver, sellerKeyPair, buyerKeyPair),
+        //     "Invalid Transfer",
+        //     invalidTransferIds
+        // ))
         .thenAccept(v -> {
             println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
             // Shutdown the shared executor if implemented in Promise (if needed):
             Promise.shutdown();
         })
+        
         .exceptionally(ex -> {
             printerr("An error occurred: " + ex.getMessage());
             Promise.shutdown();
@@ -102,6 +127,7 @@ public class BigchainDBJavaDriver {
      * Configures connection URL and credentials
      */
     public static void setConfig() {
+        //BigchainDbConfigBuilder.baseUrl("http://127.0.0.1:9984/").setup();
         List<Connection> connections = new ArrayList<>();
         for (String url : DriverConstants.VALIDATOR_NODES) {
             Map<String, Object> attributes = new TreeMap<>();
@@ -176,6 +202,7 @@ public class BigchainDBJavaDriver {
                 if (sellerCreateIds.size() > i) {
                     String createId = sellerCreateIds.get(i);
                     Transaction advTransaction = Simulation.createAdv(driver, sellerKeyPair, createId, "Open");
+                    
                     if (advTransaction != null && advTransaction.getId() != null) {
                         println("Advertisement " + (i + 1) + " Created: " + advTransaction.getId());
                         return advTransaction.getId();
@@ -193,7 +220,33 @@ public class BigchainDBJavaDriver {
             }
         });
     }
-
+    /**
+     * Creates tasks to create advertisements for each seller asset.
+     */
+    private static List<Supplier<String>> createInvalidTransferTasks(List<String> sellerCreateIds, BigchainDBJavaDriver driver, KeyPair sellerKeyPair, KeyPair buyerKeyPair) {
+        return createTasks(sellerCreateIds.size(), "Invalid Transfer", i -> {
+            try {
+                if (sellerCreateIds.size() > i) {
+                    String createId = sellerCreateIds.get(i);
+                    
+                    Transaction transfer = Simulation.createTransfer(driver, sellerKeyPair, createId, buyerKeyPair);
+                    if (transfer != null && transfer.getId() != null) {
+                        println("Transfer Asset " + (i + 1) + " Created: " + transfer.getId());
+                        return transfer.getId();
+                    } else {
+                        printerr("Failed to create Transfer for Seller Asset " + (i + 1));
+                        return null;
+                    }
+                } else {
+                    printerr("Seller Asset not available for Transfer at index: " + i);
+                    return null;
+                }
+            } catch (Exception e) {
+                printerr("Exception creating Transfer " + (i + 1) + ": " + e.getMessage());
+                return null;
+            }
+        });
+    }
     /**
      * Creates tasks to create buy offers for each valid advertisement.
      */
@@ -260,6 +313,40 @@ public class BigchainDBJavaDriver {
     }
 
     /**
+     * Creates tasks to create invalid sell transactions for each valid advertisement and corresponding buy offer.
+     */
+    private static List<Supplier<String>> createInvalidSellTasks(List<String> sellerCreateIds, List<String> advIds, List<String> invalidBuyOfferIds, BigchainDBJavaDriver driver, KeyPair sellerKeyPair,int count) {
+        //int count = Math.min(Math.min(sellerCreateIds.size(), advIds.size()), invalidBuyOfferIds.size());
+        return createTasks(count, "Invalid Sell Transaction", i -> {
+            try {
+                
+                
+                if (sellerCreateIds.size() > i && advIds.size() > i && invalidBuyOfferIds.size() > i) {
+                    String createId = sellerCreateIds.get(i);
+                    String advId = advIds.get(i);
+                    String buyOfferId = invalidBuyOfferIds.get(i);
+                    Transaction invalidSellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
+                    if (invalidSellTransaction != null && invalidSellTransaction.getId() != null) {
+                        //invalidSellIds.add(invalidSellTransaction.getId());
+                        System.out.println("Invalid Sell Transaction " + (i + 1) + " Created: " + invalidSellTransaction.getId());
+                        return invalidSellTransaction.getId();
+                    } else {
+                        System.err.println("Failed to create Invalid Sell Transaction for Advertisement " + (i + 1));
+                        return null;
+                    }
+                } else {
+                    System.err.println("Seller Asset, Advertisement, or Invalid Buy Offer not available for Invalid Sell Transaction creation at index: " + i);
+                    return null;
+                }                      
+            
+            } catch (Exception e) {
+                printerr("Exception creating Sell Transaction " + (i + 1) + ": " + e.getMessage());
+                return null;
+            }
+        });
+    }
+
+    /**
      * Creates tasks to handle returns for a subset of sell transactions.
      */
     private static List<Supplier<Void>> createReturnTasks(List<String> sellIds, List<String> buyOfferIds, BigchainDBJavaDriver driver, KeyPair sellerKeyPair, KeyPair buyerKeyPair, int count) {
@@ -301,6 +388,67 @@ public class BigchainDBJavaDriver {
                 printerr("Exception in Return Handling for Sell Transaction " + (i + 1) + ": " + e.getMessage());
             }
             return null;
+        });
+    }
+    /**
+     * Creates tasks invalid advertisements transactions for each valid advertisement and corresponding buy offer.
+     */
+    private static List<Supplier<String>> createInvalidAdvertisementsTasks(List<String> sellerCreateIds, BigchainDBJavaDriver driver, KeyPair sellerKeyPair ,int count) {
+        return createTasks(sellerCreateIds.size(), "Invalid Advertisement", i -> {
+            try {
+                
+                    if (sellerCreateIds.size() > i) {
+                        String createId = sellerCreateIds.get(i);
+                        Transaction invalidAdvTransaction = Simulation.createAdv(driver, sellerKeyPair, createId, "Open");
+                        if (invalidAdvTransaction != null && invalidAdvTransaction.getId() != null) {
+                           // invalidAdvIds.add(invalidAdvTransaction.getId());
+                            System.out.println("Invalid Advertisement " + (i + 1) + " Created: " + invalidAdvTransaction.getId());
+                            return invalidAdvTransaction.getId();
+                        } else {
+                            System.err.println("Failed to create Invalid Advertisement for Seller Asset " + (i + 1));
+                            return null;
+                        }
+                    } else {
+                        System.err.println("Seller Asset not available for Invalid Advertisement creation at index: " + i);
+                        return null;
+                    }    
+                
+            
+            } catch (Exception e) {
+                printerr("Exception creating Invalid Advertisement " + (i + 1) + ": " + e.getMessage());
+                return null;
+            }
+        });
+    }
+    /**
+     * Creates tasks to create invalid buy offers for each valid advertisement.
+     */
+    private static List<Supplier<String>> createInvalidBuyOfferTasks(List<String> advIds, List<String> buyerCreateIds, BigchainDBJavaDriver driver, KeyPair buyerKeyPair, KeyPair sellerKeyPair, List<String> sellerCreateIds, int count) {
+        //int count = Math.min(advIds.size(), buyerCreateIds.size());
+        return createTasks(count, "Invalid Buy Offer", i -> {
+            try {
+                  
+                        if (advIds.size() > i && buyerCreateIds.size() > i) {
+                            String advId = advIds.get(i);
+                            Simulation.updateAdv(driver, sellerKeyPair, sellerCreateIds.get(i), advId); // Close the advertisement
+                            Transaction invalidBuyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateIds.get(i));
+                            if (invalidBuyOfferTransaction != null && invalidBuyOfferTransaction.getId() != null) {
+                                //invalidBuyOfferIds.add(invalidBuyOfferTransaction.getId());
+                                System.out.println("Invalid Buy Offer " + (i + 1) + " Created: " + invalidBuyOfferTransaction.getId());
+                                return invalidBuyOfferTransaction.getId();
+                            } else {
+                                System.err.println("Failed to create Invalid Buy Offer for Advertisement " + (i + 1));
+                                return null;
+                            }
+                        } else {
+                            System.err.println("Advertisement or Buyer Asset not available for Invalid Buy Offer creation at index: " + i);
+                            return null;
+                        }                 
+                           
+            } catch (Exception e) {
+                printerr("Exception creating Invalid Buy Offer " + (i + 1) + ": " + e.getMessage());
+                return null;
+            }
         });
     }
 
