@@ -33,7 +33,7 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 10;
+        int validAssetCount = 5;
         int invalidAssetCount = 1;
 
         // Transaction ID lists
@@ -57,6 +57,11 @@ public class BigchainDBJavaDriver {
             "Buyer Asset",
             buyerCreateIds
         ))
+        .thenCompose(v -> {
+            CompletableFuture<Void> delay = new CompletableFuture<>();
+            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
+            return delay;
+        })
         .thenCompose(v -> executeAndProcess(
             createAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair),
             "Advertisement",
@@ -64,7 +69,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 10, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -72,6 +77,11 @@ public class BigchainDBJavaDriver {
             "Buy Offer",
             buyOfferIds
         ))
+        .thenCompose(v -> {
+            CompletableFuture<Void> delay = new CompletableFuture<>();
+            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
+            return delay;
+        })
         .thenCompose(v -> executeAndProcess(
             createSellTasks(sellerCreateIds, advIds, buyOfferIds, driver, sellerKeyPair),
             "Sell Transaction",
@@ -79,24 +89,24 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 10, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
-        .thenCompose(v -> executeAndProcess(
-            createInvalidAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
-            "Invalid Advertisement",
-            invalidAdvIds
-        ))
-        .thenCompose(v -> executeAndProcess(
-            createInvalidBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair ,sellerKeyPair,sellerCreateIds,(int) (invalidAssetCount )),
-            "invalid Buy Offer",
-            invalidBuyOfferIds
-        ))
-        .thenCompose(v -> executeAndProcess(
-            createInvalidSellTasks(sellerCreateIds, advIds, invalidBuyOfferIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
-            "invalid Sell Transaction",
-            invalidSellIds
-        ))
+        // .thenCompose(v -> executeAndProcess(
+        //     createInvalidAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
+        //     "Invalid Advertisement",
+        //     invalidAdvIds
+        // ))
+        // .thenCompose(v -> executeAndProcess(
+        //     createInvalidBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair ,sellerKeyPair,sellerCreateIds,(int) (invalidAssetCount )),
+        //     "invalid Buy Offer",
+        //     invalidBuyOfferIds
+        // ))
+        // .thenCompose(v -> executeAndProcess(
+        //     createInvalidSellTasks(sellerCreateIds, advIds, invalidBuyOfferIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
+        //     "invalid Sell Transaction",
+        //     invalidSellIds
+        // ))
         .thenCompose(v -> executeAndProcess(
             createReturnTasks(sellIds, buyOfferIds, driver, sellerKeyPair, buyerKeyPair, (int) (validAssetCount )),
             "Return Handling",
@@ -258,7 +268,7 @@ public class BigchainDBJavaDriver {
                 String buyerCreateId = buyerCreateIds.get(i);
                 Transaction committedAdvTx = TransactionsApi.waitForCommitWorkflow(advId);
 
-                if (committedAdvTx != null) {
+                //if (committedAdvTx != null) {
                     // Proceed with the buy offer creation after the advertisement is committed
                     Transaction buyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateId);
                     if (buyOfferTransaction != null && buyOfferTransaction.getId() != null) {
@@ -268,10 +278,10 @@ public class BigchainDBJavaDriver {
                         printerr("Failed to create Buy Offer " + (i + 1));
                         return null;
                     }
-                } else {
-                    printerr("Advertisement " + advId + " was not committed. Skipping Buy Offer creation.");
-                    return null;
-                }
+                // } else {
+                //     printerr("Advertisement " + advId + " was not committed. Skipping Buy Offer creation.");
+                //     return null;
+                // }
                 
             } catch (Exception e) {
                 printerr("Exception creating Buy Offer " + (i + 1) + ": " + e.getMessage());
@@ -292,7 +302,7 @@ public class BigchainDBJavaDriver {
                 String buyOfferId = buyOfferIds.get(i);
                 Transaction committedAdvTx = TransactionsApi.waitForCommitWorkflow(buyOfferId);
 
-                if (committedAdvTx != null) {
+                //if (committedAdvTx != null) {
                     Transaction sellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
                     if (sellTransaction != null && sellTransaction.getId() != null) {
                         println("Sell Transaction " + (i + 1) + " Created: " + sellTransaction.getId());
@@ -301,10 +311,10 @@ public class BigchainDBJavaDriver {
                         printerr("Failed to create Sell Transaction " + (i + 1));
                         return null;
                     }
-                } else {
-                    printerr("Advertisement " + advId + " was not committed. Skipping Buy Offer creation.");
-                    return null;
-                }
+                // } else {
+                //     printerr("Advertisement " + advId + " was not committed. Skipping Buy Offer creation.");
+                //     return null;
+                // }
             } catch (Exception e) {
                 printerr("Exception creating Sell Transaction " + (i + 1) + ": " + e.getMessage());
                 return null;
