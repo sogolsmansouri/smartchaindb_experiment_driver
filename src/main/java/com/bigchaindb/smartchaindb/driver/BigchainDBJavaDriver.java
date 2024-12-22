@@ -56,7 +56,7 @@ public class BigchainDBJavaDriver {
         ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
 
         setConfig();
-
+        long startTime = System.nanoTime();
         KeyPair sellerKeyPair = BigchainDBJavaDriver.getKeys();
         KeyPair buyerKeyPair = BigchainDBJavaDriver.getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
@@ -304,7 +304,18 @@ public class BigchainDBJavaDriver {
                     }
                 }).get();
             }
-        
+            long endTime = System.nanoTime();
+            long elapsedTime = endTime - startTime; // In nanoseconds
+            double elapsedTimeInSeconds = elapsedTime / 1_000_000_000.0;
+            int totalTransactions = sellerCreateIds.size() + buyerCreateIds.size() + advIds.size() +
+            buyOfferIds.size() + sellIds.size() + invalidAssetCount *3;
+    
+            double throughput = totalTransactions / elapsedTimeInSeconds;
+            println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
+            println("Total Transactions: " + totalTransactions);
+            println("Elapsed Time: " + elapsedTimeInSeconds + " seconds");
+            println("Throughput: " + throughput + " transactions/second");
+    
             System.out.println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
         
         } catch (InterruptedException e) {
