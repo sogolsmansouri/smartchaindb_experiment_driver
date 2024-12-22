@@ -47,6 +47,13 @@ public class BigchainDBJavaDriver {
         String publicKey= '"'+parts[1].replaceAll(",","comma") + '"';
         String jsonPayload='"'+payloadString.replaceAll(",","comma")+ '"';
         */
+        if (args.length < 1) {
+            System.out.println("Usage: java Main <number_of_threads>");
+            System.exit(1);
+        }
+
+        int numberOfThreads = Integer.parseInt(args[0]);  // Number of threads set by the user
+        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
 
         setConfig();
 
@@ -66,7 +73,6 @@ public class BigchainDBJavaDriver {
         int validAssetCount = 5;
         int invalidAssetCount = 0;
         
-        ExecutorService executor = Executors.newFixedThreadPool(10);
         
         try {
             // Step 1: Create assets for the seller
@@ -187,117 +193,117 @@ public class BigchainDBJavaDriver {
             }
         
             // Step 6: Handle returns for 20% of sell transactions
-            // for (int i = 0; i < validAssetCount * 0.2; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (sellIds.size() > index) {
-            //                 String sellId = sellIds.get(index);
-            //                 List<String> transferTxns = TransactionsApi.getTransferTransactionIdsByAssetId(sellId);
-            //                 if (!transferTxns.isEmpty()) {
-            //                     Transaction inverse = Simulation.createReturnSell(driver, buyerKeyPair, sellId, transferTxns.get(0));
-            //                     if (inverse != null && inverse.getId() != null) {
-            //                         String buyOfferId = buyOfferIds.get(index);
-            //                         List<String> returnTxns = TransactionsApi.getTransferTransactionIdsByAssetId(buyOfferId);
-            //                         if (!returnTxns.isEmpty()) {
-            //                             Transaction acceptReturn = Simulation.createAcceptReturn(driver, sellerKeyPair, buyOfferId, returnTxns.get(0), inverse.getId());
-            //                             if (acceptReturn != null && acceptReturn.getId() != null) {
-            //                                 System.out.println("Return and Accept Return for Sell Transaction " + (index + 1) + " Completed");
-            //                             } else {
-            //                                 System.err.println("Failed to create Accept Return for Sell Transaction " + (index + 1));
-            //                             }
-            //                         } else {
-            //                             System.err.println("No return transactions available for Buy Offer ID: " + buyOfferId);
-            //                         }
-            //                     } else {
-            //                         System.err.println("Failed to create Return Sell for Sell Transaction " + (index + 1));
-            //                     }
-            //                 } else {
-            //                     System.err.println("No transfer transactions available for Sell ID: " + sellId);
-            //                 }
-            //             } else {
-            //                 System.err.println("Sell Transaction not available for return handling at index: " + index);
-            //             }
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
+            for (int i = 0; i < validAssetCount * 0.2; i++) {
+                int index = i;
+                executor.submit(() -> {
+                    try {
+                        if (sellIds.size() > index) {
+                            String sellId = sellIds.get(index);
+                            List<String> transferTxns = TransactionsApi.getTransferTransactionIdsByAssetId(sellId);
+                            if (!transferTxns.isEmpty()) {
+                                Transaction inverse = Simulation.createReturnSell(driver, buyerKeyPair, sellId, transferTxns.get(0));
+                                if (inverse != null && inverse.getId() != null) {
+                                    String buyOfferId = buyOfferIds.get(index);
+                                    List<String> returnTxns = TransactionsApi.getTransferTransactionIdsByAssetId(buyOfferId);
+                                    if (!returnTxns.isEmpty()) {
+                                        Transaction acceptReturn = Simulation.createAcceptReturn(driver, sellerKeyPair, buyOfferId, returnTxns.get(0), inverse.getId());
+                                        if (acceptReturn != null && acceptReturn.getId() != null) {
+                                            System.out.println("Return and Accept Return for Sell Transaction " + (index + 1) + " Completed");
+                                        } else {
+                                            System.err.println("Failed to create Accept Return for Sell Transaction " + (index + 1));
+                                        }
+                                    } else {
+                                        System.err.println("No return transactions available for Buy Offer ID: " + buyOfferId);
+                                    }
+                                } else {
+                                    System.err.println("Failed to create Return Sell for Sell Transaction " + (index + 1));
+                                }
+                            } else {
+                                System.err.println("No transfer transactions available for Sell ID: " + sellId);
+                            }
+                        } else {
+                            System.err.println("Sell Transaction not available for return handling at index: " + index);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).get();
+            }
         
             // Step 7: Create invalid advertisements (duplicates with open status)
-            // for (int i = 0; i < validAssetCount * 0.1; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (sellerCreateIds.size() > index) {
-            //                 String createId = sellerCreateIds.get(index);
-            //                 Transaction invalidAdvTransaction = Simulation.createAdv(driver, sellerKeyPair, createId, "Open");
-            //                 if (invalidAdvTransaction != null && invalidAdvTransaction.getId() != null) {
-            //                     invalidAdvIds.add(invalidAdvTransaction.getId());
-            //                     System.out.println("Invalid Advertisement " + (index + 1) + " Created: " + invalidAdvTransaction.getId());
-            //                 } else {
-            //                     System.err.println("Failed to create Invalid Advertisement for Seller Asset " + (index + 1));
-            //                 }
-            //             } else {
-            //                 System.err.println("Seller Asset not available for Invalid Advertisement creation at index: " + index);
-            //             }
-            //             Thread.sleep(100); // Optional delay to avoid overload
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
+            for (int i = 0; i < validAssetCount * 0.1; i++) {
+                int index = i;
+                executor.submit(() -> {
+                    try {
+                        if (sellerCreateIds.size() > index) {
+                            String createId = sellerCreateIds.get(index);
+                            Transaction invalidAdvTransaction = Simulation.createAdv(driver, sellerKeyPair, createId, "Open");
+                            if (invalidAdvTransaction != null && invalidAdvTransaction.getId() != null) {
+                                invalidAdvIds.add(invalidAdvTransaction.getId());
+                                System.out.println("Invalid Advertisement " + (index + 1) + " Created: " + invalidAdvTransaction.getId());
+                            } else {
+                                System.err.println("Failed to create Invalid Advertisement for Seller Asset " + (index + 1));
+                            }
+                        } else {
+                            System.err.println("Seller Asset not available for Invalid Advertisement creation at index: " + index);
+                        }
+                        Thread.sleep(100); // Optional delay to avoid overload
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).get();
+            }
         
             // Step 8: Create invalid buy offers (referencing closed advertisements)
-            // for (int i = 0; i < validAssetCount * 0.1; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (advIds.size() > index && buyerCreateIds.size() > index) {
-            //                 String advId = advIds.get(index);
-            //                 Simulation.updateAdv(driver, sellerKeyPair, sellerCreateIds.get(index), advId); // Close the advertisement
-            //                 Transaction invalidBuyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateIds.get(index));
-            //                 if (invalidBuyOfferTransaction != null && invalidBuyOfferTransaction.getId() != null) {
-            //                     invalidBuyOfferIds.add(invalidBuyOfferTransaction.getId());
-            //                     System.out.println("Invalid Buy Offer " + (index + 1) + " Created: " + invalidBuyOfferTransaction.getId());
-            //                 } else {
-            //                     System.err.println("Failed to create Invalid Buy Offer for Advertisement " + (index + 1));
-            //                 }
-            //             } else {
-            //                 System.err.println("Advertisement or Buyer Asset not available for Invalid Buy Offer creation at index: " + index);
-            //             }
-            //             Thread.sleep(100); // Optional delay to avoid overload
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
+            for (int i = 0; i < validAssetCount * 0.1; i++) {
+                int index = i;
+                executor.submit(() -> {
+                    try {
+                        if (advIds.size() > index && buyerCreateIds.size() > index) {
+                            String advId = advIds.get(index);
+                            Simulation.updateAdv(driver, sellerKeyPair, sellerCreateIds.get(index), advId); // Close the advertisement
+                            Transaction invalidBuyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateIds.get(index));
+                            if (invalidBuyOfferTransaction != null && invalidBuyOfferTransaction.getId() != null) {
+                                invalidBuyOfferIds.add(invalidBuyOfferTransaction.getId());
+                                System.out.println("Invalid Buy Offer " + (index + 1) + " Created: " + invalidBuyOfferTransaction.getId());
+                            } else {
+                                System.err.println("Failed to create Invalid Buy Offer for Advertisement " + (index + 1));
+                            }
+                        } else {
+                            System.err.println("Advertisement or Buyer Asset not available for Invalid Buy Offer creation at index: " + index);
+                        }
+                        Thread.sleep(100); // Optional delay to avoid overload
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).get();
+            }
         
             // Step 9: Create invalid sell transactions (referencing closed advertisements)
-            // for (int i = 0; i < validAssetCount * 0.1; i++) {
-            //     int index = i;
-            //     executor.submit(() -> {
-            //         try {
-            //             if (sellerCreateIds.size() > index && advIds.size() > index && invalidBuyOfferIds.size() > index) {
-            //                 String createId = sellerCreateIds.get(index);
-            //                 String advId = advIds.get(index);
-            //                 String buyOfferId = invalidBuyOfferIds.get(index);
-            //                 Transaction invalidSellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
-            //                 if (invalidSellTransaction != null && invalidSellTransaction.getId() != null) {
-            //                     invalidSellIds.add(invalidSellTransaction.getId());
-            //                     System.out.println("Invalid Sell Transaction " + (index + 1) + " Created: " + invalidSellTransaction.getId());
-            //                 } else {
-            //                     System.err.println("Failed to create Invalid Sell Transaction for Advertisement " + (index + 1));
-            //                 }
-            //             } else {
-            //                 System.err.println("Seller Asset, Advertisement, or Invalid Buy Offer not available for Invalid Sell Transaction creation at index: " + index);
-            //             }
-            //             Thread.sleep(100); // Optional delay to avoid overload
-            //         } catch (Exception e) {
-            //             e.printStackTrace();
-            //         }
-            //     }).get();
-            // }
+            for (int i = 0; i < validAssetCount * 0.1; i++) {
+                int index = i;
+                executor.submit(() -> {
+                    try {
+                        if (sellerCreateIds.size() > index && advIds.size() > index && invalidBuyOfferIds.size() > index) {
+                            String createId = sellerCreateIds.get(index);
+                            String advId = advIds.get(index);
+                            String buyOfferId = invalidBuyOfferIds.get(index);
+                            Transaction invalidSellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
+                            if (invalidSellTransaction != null && invalidSellTransaction.getId() != null) {
+                                invalidSellIds.add(invalidSellTransaction.getId());
+                                System.out.println("Invalid Sell Transaction " + (index + 1) + " Created: " + invalidSellTransaction.getId());
+                            } else {
+                                System.err.println("Failed to create Invalid Sell Transaction for Advertisement " + (index + 1));
+                            }
+                        } else {
+                            System.err.println("Seller Asset, Advertisement, or Invalid Buy Offer not available for Invalid Sell Transaction creation at index: " + index);
+                        }
+                        Thread.sleep(100); // Optional delay to avoid overload
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).get();
+            }
         
             System.out.println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
         
