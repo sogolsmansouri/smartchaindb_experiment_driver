@@ -70,8 +70,8 @@ public class BigchainDBJavaDriver {
         List<String> invalidBuyOfferIds = new CopyOnWriteArrayList<>();
         List<String> invalidSellIds = new CopyOnWriteArrayList<>();
         
-        int validAssetCount = 5;
-        int invalidAssetCount = 0;
+        int validAssetCount = 150;
+        int invalidAssetCount = 64;
         
         
         try {
