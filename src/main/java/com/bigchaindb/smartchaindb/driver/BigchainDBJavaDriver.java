@@ -48,7 +48,7 @@ public class BigchainDBJavaDriver {
         String jsonPayload='"'+payloadString.replaceAll(",","comma")+ '"';
         */
         
-        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         setConfig();
         long startTime = System.nanoTime();
@@ -82,7 +82,7 @@ public class BigchainDBJavaDriver {
                         } else {
                             System.err.println("Failed to create Seller Asset " + (index + 1));
                         }
-                        Thread.sleep(100); // Optional delay to avoid overload
+                        Thread.sleep(300); // Optional delay to avoid overload
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -101,7 +101,7 @@ public class BigchainDBJavaDriver {
                         } else {
                             System.err.println("Failed to create Buyer Asset " + (index + 1));
                         }
-                        Thread.sleep(100); // Optional delay to avoid overload
+                        Thread.sleep(300); // Optional delay to avoid overload
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -126,7 +126,7 @@ public class BigchainDBJavaDriver {
                         } else {
                             System.err.println("Seller Asset not available for Advertisement creation at index: " + index);
                         }
-                        Thread.sleep(100); // Optional delay to avoid overload
+                        Thread.sleep(300); // Optional delay to avoid overload
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -250,7 +250,7 @@ public class BigchainDBJavaDriver {
             }
         
             // Step 8: Create invalid buy offers (referencing closed advertisements)
-            for (int i = 0; i < validAssetCount * 0.1; i++) {
+            for (int i = 0; i < invalidAssetCount; i++) {
                 int index = i;
                 executor.submit(() -> {
                     try {
@@ -275,7 +275,7 @@ public class BigchainDBJavaDriver {
             }
         
             // Step 9: Create invalid sell transactions (referencing closed advertisements)
-            for (int i = 0; i < validAssetCount * 0.1; i++) {
+            for (int i = 0; i < invalidAssetCount; i++) {
                 int index = i;
                 executor.submit(() -> {
                     try {
