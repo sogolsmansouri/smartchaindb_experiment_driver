@@ -47,12 +47,7 @@ public class BigchainDBJavaDriver {
         String publicKey= '"'+parts[1].replaceAll(",","comma") + '"';
         String jsonPayload='"'+payloadString.replaceAll(",","comma")+ '"';
         */
-        if (args.length < 1) {
-            System.out.println("Usage: java Main <number_of_threads>");
-            System.exit(1);
-        }
-
-        int numberOfThreads = Integer.parseInt(args[0]);  // Number of threads set by the user
+        
         ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
 
         setConfig();

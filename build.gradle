@@ -75,17 +75,9 @@ checkstyle {
  sourceSets = []
 }
 
-// run {
-//     doFirst {
-//         def numProcesses = project.findProperty('numProcesses') ?: '1'
-//         args = [numProcesses]
-//     }
-// }
 run {
-    if (project.hasProperty('numProcesses')) {
-        args = [project.numProcesses.toString()]
-    } else {
-        args = ['1'] // default to 1 if not specified
+    doFirst {
+        def numProcesses = project.findProperty('numProcesses') ?: '1'
+        args = [numProcesses]
     }
 }
-
