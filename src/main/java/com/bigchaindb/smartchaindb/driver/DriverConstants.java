@@ -6,10 +6,13 @@ import java.util.List;
 public class DriverConstants {
     // Generic constants
     protected static final String SMARTCHAINDB_PUBKEY = "7EAsHUGQ15LdS2NoX9543bgEoZg7BmkVqdxSmiSda3Dv";
-    protected static final List<String> VALIDATOR_NODES = Arrays.asList("http://157.230.223.222:9984/",
-            "http://134.209.123.8:9984/", "http://157.230.223.180:9984/", "http://134.209.121.67:9984/");
+    protected static final List<String> VALIDATOR_NODES = Arrays.asList("http://68.183.100.229:9984/",
+            "http://142.93.240.25:9984/", "http://159.89.84.207:9984/", "http://192.241.156.50:9984/");
          
-
+            
+            
+            
+            
     // Kafka-related constants
     protected static final String KAFKA_BROKERS = "152.7.99.165:9092";
     protected static final String OFFSET_RESET_EARLIER = "earliest";
