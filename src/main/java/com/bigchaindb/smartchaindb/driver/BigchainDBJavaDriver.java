@@ -28,12 +28,12 @@ public class BigchainDBJavaDriver {
         println("Running Process: " + getProcessId());
 
         setConfig();
-
+        long startTime = System.nanoTime();
         KeyPair sellerKeyPair = getKeys();
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 5;
+        int validAssetCount = 150;
         int invalidAssetCount = 1;
 
         // Transaction ID lists
@@ -79,7 +79,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 100, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -89,7 +89,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 100, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         // .thenCompose(v -> executeAndProcess(
@@ -119,6 +119,20 @@ public class BigchainDBJavaDriver {
         //     invalidTransferIds
         // ))
         .thenAccept(v -> {
+            long endTime = System.nanoTime();
+            long elapsedTime = endTime - startTime; // In nanoseconds
+            double elapsedTimeInSeconds = elapsedTime / 1_000_000_000.0;
+            int totalTransactions = sellerCreateIds.size() + buyerCreateIds.size() + advIds.size() +
+            buyOfferIds.size() + sellIds.size() + invalidAssetCount *3;
+    
+            double throughput = totalTransactions / elapsedTimeInSeconds;
+            println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
+            println("Total Transactions: " + totalTransactions);
+            println("Elapsed Time: " + elapsedTimeInSeconds + " seconds");
+            println("Throughput: " + throughput + " transactions/second");
+    
+            System.out.println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
+        
             println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
             // Shutdown the shared executor if implemented in Promise (if needed):
             Promise.shutdown();
