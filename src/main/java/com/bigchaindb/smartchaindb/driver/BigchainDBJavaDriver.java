@@ -33,7 +33,7 @@ public class BigchainDBJavaDriver {
         KeyPair buyerKeyPair = getKeys();
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
 
-        int validAssetCount = 150;
+        int validAssetCount = 1;
         int invalidAssetCount = 1;
 
         // Transaction ID lists
@@ -59,7 +59,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -69,7 +69,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 60, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -79,7 +79,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 100, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -89,7 +89,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 100, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
             return delay;
         })
         // .thenCompose(v -> executeAndProcess(
