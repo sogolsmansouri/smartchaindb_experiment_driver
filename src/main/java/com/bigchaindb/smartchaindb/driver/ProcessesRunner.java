@@ -1,5 +1,6 @@
 package com.bigchaindb.smartchaindb.driver;
 
+import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ public class ProcessesRunner {
         
         try {
             startProcesses(numProcesses);
+            calculateOverallThroughput();
         } catch (IOException | InterruptedException e) {
             System.err.println("Error while launching processes: " + e.getMessage());
             e.printStackTrace();
@@ -76,5 +78,36 @@ public class ProcessesRunner {
             }
         }
         return num;
+    }
+
+    private static void calculateOverallThroughput() {
+        long earliestStart = Long.MAX_VALUE;
+        long latestEnd = Long.MIN_VALUE;
+        int totalTransactions = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("processor_metrics.log"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                long startTime = Long.parseLong(parts[2].split("=")[1]);
+                long endTime = Long.parseLong(parts[3].split("=")[1]);
+                int transactions = Integer.parseInt(parts[1].split("=")[1]);
+
+                earliestStart = Math.min(earliestStart, startTime);
+                latestEnd = Math.max(latestEnd, endTime);
+                totalTransactions += transactions;
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading processor metrics: " + e.getMessage());
+            return;
+        }
+
+        double elapsedTime = (latestEnd - earliestStart) / 1_000_000_000.0;
+        double throughput = totalTransactions / elapsedTime;
+
+        System.out.println("Overall Throughput Calculation:");
+        System.out.println("Total Transactions: " + totalTransactions);
+        System.out.println("Elapsed Time: " + elapsedTime + " seconds");
+        System.out.println("Throughput: " + throughput + " transactions/second");
     }
 }

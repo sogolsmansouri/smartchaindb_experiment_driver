@@ -17,24 +17,32 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.CompletableFuture;
-
+import java.util.concurrent.atomic.AtomicLong;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class BigchainDBJavaDriver {
     public boolean COMMIT_TX = true;
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    public static void main(String[] args) {
-        println("Running Process: " + getProcessId());
+    private static final AtomicLong transactionCount = new AtomicLong(0); // Define transactionCount here
 
+    public static void main(String[] args) {
+        clearMetricsLog();
+        println("Running Process: " + getProcessId());
+        int processId = getProcessId();
+        
         setConfig();
         long startTime = System.nanoTime();
         KeyPair sellerKeyPair = getKeys();
         KeyPair buyerKeyPair = getKeys();
+        
         BigchainDBJavaDriver driver = new BigchainDBJavaDriver();
-
-        int validAssetCount = 1;
-        int invalidAssetCount = 1;
+        //AtomicLong transactionCount = new AtomicLong(0);
+        int validAssetCount = 150;
+        int invalidAssetCount = 64;
 
         // Transaction ID lists
         List<String> sellerCreateIds = new CopyOnWriteArrayList<>();
@@ -59,7 +67,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 100, TimeUnit.SECONDS); //100// Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -69,7 +77,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 200, TimeUnit.SECONDS); // 200 Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -79,7 +87,7 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 300, TimeUnit.SECONDS); // 300Introduce a 10-second delay
             return delay;
         })
         .thenCompose(v -> executeAndProcess(
@@ -89,24 +97,24 @@ public class BigchainDBJavaDriver {
         ))
         .thenCompose(v -> {
             CompletableFuture<Void> delay = new CompletableFuture<>();
-            scheduler.schedule(() -> delay.complete(null), 2, TimeUnit.SECONDS); // Introduce a 10-second delay
+            scheduler.schedule(() -> delay.complete(null), 300, TimeUnit.SECONDS); //300 Introduce a 10-second delay
             return delay;
         })
-        // .thenCompose(v -> executeAndProcess(
-        //     createInvalidAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
-        //     "Invalid Advertisement",
-        //     invalidAdvIds
-        // ))
-        // .thenCompose(v -> executeAndProcess(
-        //     createInvalidBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair ,sellerKeyPair,sellerCreateIds,(int) (invalidAssetCount )),
-        //     "invalid Buy Offer",
-        //     invalidBuyOfferIds
-        // ))
-        // .thenCompose(v -> executeAndProcess(
-        //     createInvalidSellTasks(sellerCreateIds, advIds, invalidBuyOfferIds, driver, sellerKeyPair,(int) (invalidAssetCount )),
-        //     "invalid Sell Transaction",
-        //     invalidSellIds
-        // ))
+        .thenCompose(v -> executeAndProcess(
+            createInvalidAdvertisementsTasks(sellerCreateIds, driver, sellerKeyPair, (int) (invalidAssetCount )),
+            "Invalid Advertisement",
+            invalidAdvIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createInvalidBuyOfferTasks(advIds, buyerCreateIds, driver, buyerKeyPair ,sellerKeyPair,sellerCreateIds, (int) (invalidAssetCount )),
+            "invalid Buy Offer",
+            invalidBuyOfferIds
+        ))
+        .thenCompose(v -> executeAndProcess(
+            createInvalidSellTasks(sellerCreateIds, advIds, invalidBuyOfferIds, driver, sellerKeyPair, (int) (invalidAssetCount )),
+            "invalid Sell Transaction",
+            invalidSellIds
+        ))
         .thenCompose(v -> executeAndProcess(
             createReturnTasks(sellIds, buyOfferIds, driver, sellerKeyPair, buyerKeyPair, (int) (validAssetCount )),
             "Return Handling",
@@ -120,20 +128,10 @@ public class BigchainDBJavaDriver {
         // ))
         .thenAccept(v -> {
             long endTime = System.nanoTime();
-            long elapsedTime = endTime - startTime; // In nanoseconds
-            double elapsedTimeInSeconds = elapsedTime / 1_000_000_000.0;
-            int totalTransactions = sellerCreateIds.size() + buyerCreateIds.size() + advIds.size() +
-            buyOfferIds.size() + sellIds.size() + invalidAssetCount *3;
-    
-            double throughput = totalTransactions / elapsedTimeInSeconds;
-            println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
-            println("Total Transactions: " + totalTransactions);
-            println("Elapsed Time: " + elapsedTimeInSeconds + " seconds");
-            println("Throughput: " + throughput + " transactions/second");
-    
-            System.out.println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
-        
-            println("Workflow completed successfully for " + validAssetCount + " valid assets and " + invalidAssetCount + " invalid transactions.");
+
+            logProcessorMetrics(processId, transactionCount.get(), startTime, endTime);
+            System.out.println("Process " + processId + " completed with " + transactionCount.get() + " transactions.");
+                
             // Shutdown the shared executor if implemented in Promise (if needed):
             Promise.shutdown();
         })
@@ -184,6 +182,7 @@ public class BigchainDBJavaDriver {
                 String createId = Simulation.createCreate(driver, sellerKeyPair);
                 if (createId != null) {
                     println("Seller Asset " + (i + 1) + " Created: " + createId);
+                    transactionCount.incrementAndGet(); // Increment the transaction count for this processor
                     return createId;
                 } else {
                     printerr("Failed to create Seller Asset " + (i + 1));
@@ -205,6 +204,7 @@ public class BigchainDBJavaDriver {
                 String createId = Simulation.createCreate(driver, buyerKeyPair);
                 if (createId != null) {
                     println("Buyer Asset " + (i + 1) + " Created: " + createId);
+                    transactionCount.incrementAndGet(); // Increment the transaction count for this processor
                     return createId;
                 } else {
                     printerr("Failed to create Buyer Asset " + (i + 1));
@@ -229,6 +229,7 @@ public class BigchainDBJavaDriver {
                     
                     if (advTransaction != null && advTransaction.getId() != null) {
                         println("Advertisement " + (i + 1) + " Created: " + advTransaction.getId());
+                        transactionCount.incrementAndGet();
                         return advTransaction.getId();
                     } else {
                         printerr("Failed to create Advertisement for Seller Asset " + (i + 1));
@@ -256,6 +257,7 @@ public class BigchainDBJavaDriver {
                     Transaction transfer = Simulation.createTransfer(driver, sellerKeyPair, createId, buyerKeyPair);
                     if (transfer != null && transfer.getId() != null) {
                         println("Transfer Asset " + (i + 1) + " Created: " + transfer.getId());
+                        transactionCount.incrementAndGet();
                         return transfer.getId();
                     } else {
                         printerr("Failed to create Transfer for Seller Asset " + (i + 1));
@@ -287,6 +289,7 @@ public class BigchainDBJavaDriver {
                     Transaction buyOfferTransaction = Simulation.createBuyOffer(driver, buyerKeyPair, advId, buyerCreateId);
                     if (buyOfferTransaction != null && buyOfferTransaction.getId() != null) {
                         println("Buy Offer " + (i + 1) + " Created: " + buyOfferTransaction.getId());
+                        transactionCount.incrementAndGet();
                         return buyOfferTransaction.getId();
                     } else {
                         printerr("Failed to create Buy Offer " + (i + 1));
@@ -320,6 +323,7 @@ public class BigchainDBJavaDriver {
                     Transaction sellTransaction = Simulation.createSell(driver, sellerKeyPair, createId, advId, buyOfferId);
                     if (sellTransaction != null && sellTransaction.getId() != null) {
                         println("Sell Transaction " + (i + 1) + " Created: " + sellTransaction.getId());
+                        transactionCount.incrementAndGet();
                         return sellTransaction.getId();
                     } else {
                         printerr("Failed to create Sell Transaction " + (i + 1));
@@ -353,6 +357,7 @@ public class BigchainDBJavaDriver {
                     if (invalidSellTransaction != null && invalidSellTransaction.getId() != null) {
                         //invalidSellIds.add(invalidSellTransaction.getId());
                         System.out.println("Invalid Sell Transaction " + (i + 1) + " Created: " + invalidSellTransaction.getId());
+                        transactionCount.incrementAndGet();
                         return invalidSellTransaction.getId();
                     } else {
                         System.err.println("Failed to create Invalid Sell Transaction for Advertisement " + (i + 1));
@@ -385,6 +390,7 @@ public class BigchainDBJavaDriver {
                 
                 if (!transferTxns.isEmpty()) {
                     Transaction inverse = Simulation.createReturnSell(driver, buyerKeyPair, sellId, transferTxns.get(0));
+                    transactionCount.incrementAndGet();
                     if (inverse != null && inverse.getId() != null) {
                         String buyOfferId = buyOfferIds.get(i);
                         List<String> returnTxns = TransactionsApi.getTransferTransactionIdsByAssetId(buyOfferId);
@@ -392,6 +398,7 @@ public class BigchainDBJavaDriver {
                             Transaction acceptReturn = Simulation.createAcceptReturn(driver, sellerKeyPair, buyOfferId, returnTxns.get(0), inverse.getId());
                             if (acceptReturn != null && acceptReturn.getId() != null) {
                                 println("Return and Accept Return for Sell Transaction " + (i + 1) + " Completed");
+                                transactionCount.incrementAndGet();
                             } else {
                                 printerr("Failed to create Accept Return for Sell Transaction " + (i + 1));
                             }
@@ -427,6 +434,7 @@ public class BigchainDBJavaDriver {
                         if (invalidAdvTransaction != null && invalidAdvTransaction.getId() != null) {
                            // invalidAdvIds.add(invalidAdvTransaction.getId());
                             System.out.println("Invalid Advertisement " + (i + 1) + " Created: " + invalidAdvTransaction.getId());
+                            transactionCount.incrementAndGet();
                             return invalidAdvTransaction.getId();
                         } else {
                             System.err.println("Failed to create Invalid Advertisement for Seller Asset " + (i + 1));
@@ -459,6 +467,7 @@ public class BigchainDBJavaDriver {
                             if (invalidBuyOfferTransaction != null && invalidBuyOfferTransaction.getId() != null) {
                                 //invalidBuyOfferIds.add(invalidBuyOfferTransaction.getId());
                                 System.out.println("Invalid Buy Offer " + (i + 1) + " Created: " + invalidBuyOfferTransaction.getId());
+                                transactionCount.incrementAndGet();
                                 return invalidBuyOfferTransaction.getId();
                             } else {
                                 System.err.println("Failed to create Invalid Buy Offer for Advertisement " + (i + 1));
@@ -474,6 +483,30 @@ public class BigchainDBJavaDriver {
                 return null;
             }
         });
+    }
+
+    private static void logProcessorMetrics(int processId, long transactionCount, long startTime, long endTime) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("processor_metrics.log", true))) {
+            writer.printf("Process=%d, Transactions=%d, Start=%d, End=%d%n", processId, transactionCount, startTime, endTime);
+        } catch (IOException e) {
+            System.err.println("Error logging metrics: " + e.getMessage());
+        }
+    }
+    private static void clearMetricsLog() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("processor_metrics.log"))) {
+            writer.print(""); // Clear the content
+        } catch (IOException e) {
+            System.err.println("Error clearing metrics log: " + e.getMessage());
+        }
+    }
+    
+    private static int getProcessId() {
+        String jvmName = java.lang.management.ManagementFactory.getRuntimeMXBean().getName();
+        try {
+            return Integer.parseInt(jvmName.split("@")[0]);
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     /**
@@ -535,14 +568,7 @@ public class BigchainDBJavaDriver {
         };
     }
 
-    private static long getProcessId() {
-        String jvmName = java.lang.management.ManagementFactory.getRuntimeMXBean().getName();
-        try {
-            return Long.parseLong(jvmName.split("@")[0]);
-        } catch (Exception e) {
-            return -1;
-        }
-    }
+    
 
     private static void println(String out) {
         System.out.println(getProcessId() + ": " + out);
